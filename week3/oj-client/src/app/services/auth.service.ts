@@ -58,7 +58,7 @@ export class AuthService {
       client_id: this.clientId,
       email: profile.email,
       connection: 'Username-Password-Authentication'
-    }
+    };
 
     this.http.post(url, body, headers)
       .toPromise()

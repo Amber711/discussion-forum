@@ -16,4 +16,12 @@ export class AuthGuardService implements CanActivate {
     this.router.navigate(['/problems']);
     return false;
   }
+
+  isAdmin(): boolean {
+    if(this.auth.authenticated() && this.auth.getProfile().roles.includes('Admin')) {
+      return true;
+     } else {
+      return false;
+    }
+  }
 }
