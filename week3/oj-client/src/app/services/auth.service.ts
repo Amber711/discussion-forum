@@ -11,8 +11,8 @@ declare var Auth0Lock: any;
 @Injectable()
 export class AuthService {
   // Configure Auth0
-  clientId = 'oKBLizpdfjbRhIfvcUytmrmji0L1DUBA';
-  domain = 'bittiger503codelab.auth0.com';
+  clientId = 'FJ16h1M86ceIkxHXk62lWRGrrG6J3XEQ';
+  domain = 'bittiger503amber.auth0.com';
   lock = new Auth0Lock(this.clientId, this.domain, {});
 
   constructor(private http: Http) {

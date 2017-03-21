@@ -1,11 +1,11 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var app = express();
 var restRouter = require("./routes/rest");
 var indexRouter = require("./routes/index");
 var mongoose = require("mongoose");
 var path = require("path");
 
-mongoose.connect("mongodb://user:user@ds119210.mlab.com:19210/coj");
+mongoose.connect("mongodb://user:user@ds131890.mlab.com:31890/coj");
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', indexRouter);
@@ -18,4 +18,4 @@ app.use(function(req, res) {
 
 app.listen(3000, function () {
   console.log('App listening on port 3000!')
-})
+});
