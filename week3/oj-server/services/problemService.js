@@ -10,7 +10,7 @@ var getProblems = function () {
       }
     });
   });
-}
+};
 
 var getProblem = function (id) {
   return new Promise((resolve,reject) => {
@@ -22,7 +22,7 @@ var getProblem = function (id) {
       }
     });
   });
-}
+};
 
 var addProblem = function (newProblem) {
   return new Promise((resolve,reject) => {
