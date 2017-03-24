@@ -37,7 +37,7 @@ function onListening() {
     var addr = server.address();
     var bind = typeof addr == 'string'
         ? 'pipe' + addr
-        : 'port' + addr.port
+        : 'port' + addr.port;
     console.log('server start listening at port 3000');
 
 }

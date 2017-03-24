@@ -24,12 +24,14 @@ module.exports = function(io) {
             console.log('change', socketIdToSessionId[socket.id],delta);
             let sessionId = socketIdToSessionId[socket.id];
             if(sessionId in collaborations) {
-                let participants = collaborations[sessionId][participants];
+                let participants = collaborations[sessionId]['participants'];
                 for(let i = 0; i < participants.length; i++) {
                     if(participants[i] !== socket.id) {
-                        io.to(participants[i].emit("change",delta));
+                        io.to(participants[i]).emit("change",delta);
                     }
                 }
+            } else {
+                console.log("WARNING: count not tie socket_io to any collaboration")
             }
         })
 

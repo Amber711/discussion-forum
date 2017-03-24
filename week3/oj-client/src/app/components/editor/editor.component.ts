@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 
 declare var ace: any;
-
+declare var io: any;
 
 @Component({
   selector: 'app-editor',
@@ -58,12 +58,12 @@ export class EditorComponent implements OnInit {
     //this.editor.getSession().setMode('ace/mode/java');
     //this.editor.setValue(this.defaultContent['Java']);
     this.resetEditor();
-    this.editor.$blockScrolling = Infinity;
     document.getElementsByTagName('textarea')[0].focus();
 
 
     this.collaboration.init(this.editor, this.sessionId);
     this.editor.lastAppliedChange = null;
+    this.editor.$blockScrolling = Infinity;
 
     this.editor.on('change', e => {
       console.log('editor changes:' + JSON.stringify(e));
