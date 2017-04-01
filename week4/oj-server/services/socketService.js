@@ -24,7 +24,7 @@ module.exports = function(io) {
         } else {
             redisClient.get(sessionPath +'/'+ sessionId, function(data) {
                     if(data) {
-                        console.log('this sessionId is still stored in the redis, restore it in the memory');
+                        console.log('this sessionId is still stored in the redis, restore it to the memory');
                         collaborations[sessionId] = {
                             'cachedChangeEvents': JSON.parse(data),
                             'participants': []

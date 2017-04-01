@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/debounceTime'
 
 @Component({
   selector: 'app-navbar',
@@ -29,10 +30,9 @@ export class NavbarComponent implements OnInit {
     }
 
     this.subscription = this.searchBox
-                            .valueChanges
-                            .subscribe(term => {
-                                this.input.changeInput(term)
-                            })
+            .valueChanges
+            .debounceTime(200)
+            .subscribe(term => {this.input.changeInput(term)})
 
   }
 
