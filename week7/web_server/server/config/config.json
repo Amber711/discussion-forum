@@ -1,0 +1,4 @@
+{
+  "jwtSecret": "a secret phrase!!!",
+  "mongoDbUri": "mongodb://localhost/tap-news-users"
+}
