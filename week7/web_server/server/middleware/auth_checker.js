@@ -4,7 +4,14 @@
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
 const config = require('../config/config.json');
-
+/**
+ *
+ * 1.check if there is a token, yes, get the email from token;
+ * 2. check if the email exists
+ *
+ *
+ * @returns {*}
+ */
 module.exports = (req, res, next) => {
     console.log('auth_checker: req', req.headers);
 

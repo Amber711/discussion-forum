@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var auth = require('./routes/auth');
 //var cors = require('cors')
 
 var index = require('./routes/index');
@@ -40,6 +41,7 @@ const authCheckMiddleware = require('./middleware/auth_checker');
 app.use('/news', authCheckMiddleware);
 app.use('/', index);
 app.use('/news', news);
+app.user('/auth', auth);
 
 
 // catch 404 and forward to error handler 如果request出错

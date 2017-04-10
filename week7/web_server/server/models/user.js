@@ -34,7 +34,7 @@ UserSchema.pre('save', function saveHook(next) {
         return bcrypt.hash(user.password, salt,(hashError, hash)=> {
             if(hashError) { return next(hashError)}
 
-            //replace password string with hash value;
+            //replace password string with hash value; and store to db.
             user.password = hash;
             return next();
         })

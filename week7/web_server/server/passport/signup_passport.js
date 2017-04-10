@@ -17,7 +17,7 @@ module.exports = new PassportLocalStrategy({
     };
 
     const newUser = new User(userData);
-    //无需判断email是否已经存在，因为再user.js中我们已经指定email unique
+    //无需判断email是否已经存在，因为在user.js UserSchema中我们已经指定email unique
     newUser.save(err => {
         if(err) {
             return done(err);
@@ -25,4 +25,4 @@ module.exports = new PassportLocalStrategy({
 
         return done(null)
     })
-})
+});
