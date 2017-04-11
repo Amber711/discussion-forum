@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
 
 import Auth from '../Auth/Auth';
 import LoginForm from './LoginForm';
@@ -6,9 +7,9 @@ import LoginForm from './LoginForm';
 class LoginPage extends React.Component {
 
     constructor(props, context) {
-        //you pass props to the super() only when you need to use it inside the constructor.
         super(props, context);
-       //set the initial component state  initialize user object
+
+        // set the initial component state
         this.state = {
             errors: {},
             user: {
@@ -19,44 +20,46 @@ class LoginPage extends React.Component {
 
         this.processForm = this.processForm.bind(this);
         this.changeUser = this.changeUser.bind(this);
-    };
-    //submit form
+    }
+
     processForm(event) {
+        // prevent default action. in this case, action is the form submission event
         event.preventDefault();
 
         const email = this.state.user.email;
         const password = this.state.user.password;
 
-        console.log('submit, email:' , email);
-        console.log('submit, password:' , password);
+        console.log('email:', email);
+        console.log('password:', password);
 
+        // Post login data
         fetch('http://localhost:3000/auth/login', {
             method: 'POST',
             cache: false,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 email: this.state.user.email,
                 password: this.state.user.password
             })
         }).then(response => {
-            if(response.status == 200) {
-                //if get the response successfully, clear the errors object.
+            if (response.status === 200) {
                 this.setState({
                     errors: {}
                 });
 
                 response.json().then(function(json) {
-                    console.log('submit the login form & receive the token:',json);
-                    Auth.authenticateUser(json.token.email);
+                    console.log('submit and get token',json);
+                    console.log('json token when login',json.token,typeof json.token);
+                    Auth.authenticateUser(json.token, email);
                     this.context.router.replace('/');
                 }.bind(this));
+
             } else {
                 console.log('Login failed');
-                response.json().then(function (json) {
-                    console.log('login failed, reponsed json:', json);
+                response.json().then(function(json) {
                     const errors = json.errors ? json.errors : {};
                     errors.summary = json.message;
                     this.setState({errors});
@@ -65,15 +68,14 @@ class LoginPage extends React.Component {
         });
     }
 
-    //onChange
     changeUser(event) {
         const field = event.target.name;
-        const user = this.state.user; //changeUser() is for LoginForm.js to use. but state is LoginPage.js
+        const user = this.state.user;
         user[field] = event.target.value;
 
         this.setState({
             user
-        })
+        });
     }
 
     render() {
@@ -81,15 +83,17 @@ class LoginPage extends React.Component {
             <LoginForm
                 onSubmit={this.processForm}
                 onChange={this.changeUser}
-                errors = {this.state.errors}
+                errors={this.state.errors}
                 user={this.state.user}
             />
-        )
+        );
     }
 }
 
+// To make react-router work
 LoginPage.contextTypes = {
     router: PropTypes.object.isRequired
 };
 
 export default LoginPage;
+

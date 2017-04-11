@@ -4,8 +4,11 @@
 /**
  * Created by Amber on 4/9/17.
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
+
 import './LoginForm.css';
+
 
 const LoginForm = ({
     onSubmit,
@@ -20,7 +23,7 @@ const LoginForm = ({
                 {errors.summary && <div className="row"><p className="error-message">errors.summary</p></div>}
                 <div className="row">
                     <div className="input-field col s12">
-                        <input className="validate" id="email" type="email" onChange={onChange}/>
+                        <input className="validate" id="email" type="email" name="email" onChange={onChange}/>
                         <label htmlFor="email">Email</label>
                     </div>
                 </div>

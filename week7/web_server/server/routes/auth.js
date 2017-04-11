@@ -6,7 +6,7 @@ const passport = require('passport');
 const router = express.Router();
 const validator = require('validator');
 
-router.post('/signup', (req, res, next)=>{
+router.post('/signup', (req, res, next) => {
     const validationResult = validateSignupForm(req.body);
     if(!validationResult.success) {
         console.log('validationResult Failed');
@@ -72,15 +72,10 @@ function validateSignupForm(payload) {
     }
 };
 
-router.post('/login',(req, res, next) => {
-    /**
-     * 1. use Validator to validate form
-     * 2.if form is validated successfully, use Passport.js to check the correctness of user info.
-     *
-     * @type {{success, message, errors}}
-     */
+router.post('/login', (req, res, next) => {
+
     const validationResult = validateLoginForm(req.body); //check LoginPage.js in client-side
-    if(!validationResult) {
+    if(!validationResult.success) {
         console.log('validationResult failed');
         return res.status(400).json({
             success: false,
@@ -91,13 +86,14 @@ router.post('/login',(req, res, next) => {
 
     return passport.authenticate('local-login', (err, token, userData)=> {
         //err types: 1.passwords don't match; 2.passwordErr from passport.js when comparing pwds.
+        console.log('auth.js token', token);
         if(err) {
             console.log('err in login passport:',err);
             if(err.name === 'IncorrectCredentialsError') {
                 console.log('IncorrectCredentialsError: ', err.message);
                 return res.status(400).json({
                     success: false,
-                    message: err.message //err.message自带的吗????
+                    message: err.message
                 })
             };
 
@@ -144,3 +140,5 @@ function validateLoginForm(payload) {
     }
 
 }
+
+module.exports = router;

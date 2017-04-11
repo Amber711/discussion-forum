@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Auth from '../Auth/Auth';
+import PropTypes from 'prop-types'
+
 
 const Base =({ children }) => (
     <div>
@@ -34,3 +36,5 @@ const Base =({ children }) => (
 Base.propTypes = {
     children: PropTypes.object.isRequired
 };
+
+export default Base;

@@ -7,7 +7,6 @@ const PassportLocalStrategy = require('passport-local').Strategy;
 const config = require('../config/config.json');
 
 module.exports = new PassportLocalStrategy({
-    //Both fields define the name of the properties in the POST body that are sent to the server.
     usernameField: 'email',
     passwordField: 'password',
     session: false,
@@ -52,7 +51,7 @@ module.exports = new PassportLocalStrategy({
             const data = {
                 name: user.email
             };
-
+            console.log('login passport token',token);
             return done(null, token, data);
 
         })

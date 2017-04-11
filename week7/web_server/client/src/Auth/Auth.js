@@ -9,6 +9,7 @@ class Auth {
      * @param email
      */
     static authenticateUser(token, email) {
+        console.log('set token ...');
         localStorage.setItem('token', token);
         localStorage.setItem('email', email);
     }

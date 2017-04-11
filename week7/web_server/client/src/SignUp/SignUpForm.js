@@ -1,7 +1,9 @@
 /**
  * Created by Amber on 4/9/17.
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
+
 import './SignUpForm.css';
 
 const SignUpForm = ({

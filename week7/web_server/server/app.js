@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var auth = require('./routes/auth');
-//var cors = require('cors')
+var cors = require('cors');
 
 var index = require('./routes/index');
 var news = require('./routes/news');
@@ -23,8 +23,8 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-//app.use(cors()); for cross origin access
-
+app.use(cors());
+app.use(bodyParser.json());
 app.use('/static' ,express.static(path.join(__dirname, '../client/build/static/')));
 
 
@@ -41,7 +41,7 @@ const authCheckMiddleware = require('./middleware/auth_checker');
 app.use('/news', authCheckMiddleware);
 app.use('/', index);
 app.use('/news', news);
-app.user('/auth', auth);
+app.use('/auth', auth);
 
 
 // catch 404 and forward to error handler 如果request出错

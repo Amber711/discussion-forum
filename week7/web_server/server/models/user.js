@@ -18,7 +18,6 @@ UserSchema.methods.comparePassword = function comparePassword(password, callback
 };
 
 UserSchema.pre('save', function saveHook(next) {
-    //!!!!!!!!!!!!!!!!!!!
     const user = this;
 
     // proceed further only if the password is modified or the user is new
@@ -36,6 +35,7 @@ UserSchema.pre('save', function saveHook(next) {
 
             //replace password string with hash value; and store to db.
             user.password = hash;
+            console.log('user.password after hash', user.password)
             return next();
         })
     })
