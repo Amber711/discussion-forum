@@ -20,6 +20,8 @@ export class EditorComponent implements OnInit {
 
   sessionId: string;
 
+  output: string;
+
   defaultContent = {
     'Java': `public class Example {
       public static void main(String[] args) {
@@ -28,6 +30,7 @@ export class EditorComponent implements OnInit {
 }`,
     'C++': `#include <iostream>
     using namespace std;
+    ​
     int main() {
        // Type your C++ code here
        return 0;
@@ -38,8 +41,10 @@ export class EditorComponent implements OnInit {
   };
 
 
+
   constructor(@Inject('collaboration') private collaboration,
-              private route: ActivatedRoute){
+              private route: ActivatedRoute,
+              @Inject('data') private data){
 
   }
 
@@ -90,10 +95,18 @@ export class EditorComponent implements OnInit {
     this.editor.getSession().setMode('ace/mode/'+this.language.toLocaleLowerCase());
     this.editor.setValue(this.defaultContent[this.language]);
     this.editor.$blockScrolling = Infinity;
+    this.output = "";
   }
 
   submit(): void {
-    let user_code = this.editor.getValue();
-    console.log(user_code);
+    let userCode = this.editor.getValue();
+    console.log('userCode: ',userCode);
+    let data = {
+      user_code: userCode,
+      lang: this.language.toLowerCase()
+    };
+
+    this.data.buildAndRun(data)
+      .then(res => this.output = res.text)
   }
 }
