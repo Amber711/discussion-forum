@@ -20,7 +20,7 @@ const LoginForm = ({
         <div className="card-panel login-panel">
             <form className="col s12" action="/" onSubmit={onSubmit}>
                 <h4 className="center-align">Login</h4>
-                {errors.summary && <div className="row"><p className="error-message">errors.summary</p></div>}
+                {errors.summary && <div className="row"><p className="error-message">{errors.summary}</p></div>}
                 <div className="row">
                     <div className="input-field col s12">
                         <input className="validate" id="email" type="email" name="email" onChange={onChange}/>

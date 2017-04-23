@@ -61,6 +61,7 @@ class LoginPage extends React.Component {
                 console.log('Login failed');
                 response.json().then(function(json) {
                     const errors = json.errors ? json.errors : {};
+                    console.log('login failed, json message:', json.message)
                     errors.summary = json.message;
                     this.setState({errors});
                 }.bind(this));
