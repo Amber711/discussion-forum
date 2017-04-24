@@ -5,3 +5,5 @@ requests
 redis
 lxml
 sklearn
+dateutil
+newspaper

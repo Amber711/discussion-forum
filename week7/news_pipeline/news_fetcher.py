@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import datetime
-import hashlib
+
 import os
-import redis
 import sys
+from newspaper import Article
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'scrapers'))
@@ -31,17 +30,21 @@ def handle_message(msg):
         print 'message is broken'
         return
     task = msg
-    text = ''
 
     # we support CNN only for now
-    if task['source'] == 'cnn':
+    '''if task['source'] == 'cnn':
         print 'Scraping cnn news'
         text = cnn_news_scraper.extract_news(task['url'])
         print type(text)
     else:
-        print 'News source [%s] is not supported.' % task['source']
+        print 'News source [%s] is not supported.' % task['source']'''
 
-    task['text'] = text
+    #use newspaper to substitute xpath.
+    article = Article(task['url'])
+    article.download()
+    article.parse()
+    task['text'] = article.text
+    print "*************** task['text']:" ,task['text']
     deduper_news_queue_client.sendMessage(task)
 
 while True:
