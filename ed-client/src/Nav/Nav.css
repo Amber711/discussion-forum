@@ -1,0 +1,208 @@
+body {
+    background: #fff;
+    color: #7a7c82;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0;
+    font-weight: 400;
+    padding: 0;
+    font-family: "Open Sans", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.pull-right {
+    float: right !important;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+
+
+.homeV1NavbarContainer .menu-container {
+    clear: both;
+}
+
+.homeV1NavbarContainer.absolute .nav-container {
+    max-width: 1120px;
+padding: 0 10px;
+}
+.homeV1NavbarContainer.absolute .navbar-default {
+    background-color: transparent;
+    padding: 12px 0 0 0;
+}
+
+.homeV1NavbarContainer .navbar-default {
+    background-color: #656d74;
+    padding: 0 0 0 0;
+    box-shadow: none;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+.pull-left {
+    float: left !important;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.btn-bit, .btn-bit:focus, .btn-bit:active {
+    background-color: #f3ab10 !important;
+    color: #fff !important;
+    border-color: #f3ab10;
+}
+
+.homeV1NavbarContainer .navbar-brand {
+    padding: 10px 0;
+    margin-left: 15px !important;
+}
+.navbar-default .navbar-brand {
+    color: #777;
+}
+@media (min-width: 768px) {
+    .homeV1NavbarContainer .btns-navbar {
+        margin-top: 15px
+}
+}
+
+
+.homeV1NavbarContainer .nav-lang-btns {
+    margin-top: 23px !important;
+    margin-right: 45px;
+    margin-left: 25px;
+}
+
+
+
+.navbar-brand>img {
+    display: block;
+}
+a {
+    background-color: transparent;
+}
+
+img {
+    vertical-align: middle;
+    border: 0
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    color: #777;
+}
+.homeV1NavbarContainer .logo-bittiger {
+    height: 32px;
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .homeV1NavbarContainer .btns-navbar {
+        margin-top: 15px;
+    }
+}
+
+.pull-left {
+    float: left !important;
+}
+.homeV1NavbarContainer .nav-lang-btns .btn.selected {
+    border: 1px solid #fff;
+    border-radius: 4px;
+}
+
+.homeV1NavbarContainer .nav-lang-btns .btn {
+    background: transparent;
+    color: #fff;
+    padding: 0 2px;
+    border: none;
+}
+
+.homeV1NavbarContainer .btns-navbar .btn {
+    border-radius: 3px !important;
+}
+.homeV1NavbarContainer .nav-lang-btns .lang-seperator {
+    border-left: 1px solid #fff;
+    margin: 0 2px;
+    padding: 5px 0;
+}
+a {
+    color: #656d74;
+}
+.btn, a {
+    outline: 0 !important;
+    text-decoration: none !important;
+}
+
+.homeV1NavbarContainer .navbar-default {
+    background-color: #656d74 !important;
+    padding: 0 0 0 0;
+    box-shadow: none;
+}
+@media (min-width: 768px) {
+    .homeV1NavbarContainer #homeV1-navbar .navbar-nav>li:hover>a {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-radius: 4px;
+    }
+}
+
+@media (min-width: 768px) {
+    .homeV1NavbarContainer #homeV1-navbar .navbar-nav>li>a {
+        font-size: 14px !important;
+        padding: 12px;
+        margin: 12px 6px;
+    }
+}
+
+.homeV1NavbarContainer #homeV1-navbar .navbar-nav li a {
+    font-weight: normal;
+    color: #fff !important;
+}
+
+@media (min-width: 768px) {
+    .homeV1NavbarContainer #homeV1-navbar {
+        float: right;
+    }
+}
+
+.homeV1NavbarContainer #homeV1-navbar {
+    padding-right: 0px;
+}
+
+.navbar-default .navbar-text {
+    color: #fff;
+}
+.signinBtn {
+    color: #fff;
+}
+.navbar-text .navbar-right .user {
+    color: #fff !important;
+}
+.btn .btn-default .navbar-btn {
+    background-color: #f3ab10 !important;
+    color: #fff !important;
+    border-color: #f3ab10;
+}
