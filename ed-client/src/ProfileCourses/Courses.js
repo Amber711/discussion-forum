@@ -3,8 +3,9 @@
  */
 import React from 'react';
 import "./Courses.css"
-import courPic1 from "../../public/fullstack.jpeg"
 import { Link } from "react-router"
+
+import courPic1 from "../../public/fullstack.jpeg"
 
 class Courses extends React.Component {
     constructor(props, context) {
@@ -19,13 +20,8 @@ class Courses extends React.Component {
 
     render() {
         return (
-            <div className="container mainContainer">
-                <div className="one"></div>
-                <h1 className="two">Upcoming Live Courses</h1>
-                <hr className="three" />
-                <div className="row">
 
-                    <div className="col-md-4 col-sm-6 col-xs-12 livecourse-preview-container">
+
                         <div className="livecourse-preview-content">
                             <div className="text-center">
                                 <div onClick={this.courseChosen}>
@@ -38,7 +34,7 @@ class Courses extends React.Component {
                             </div>
                             <div className="four">
                                 <div>
-                                    <a href="/livecourses/Qr9Xzmf6ZvAiKHiE4" title="LL002【免费】 “人工智能”架构篇公开课" className="livecourse-title noOverflow">LL002【免费】 “人工智能”架构篇公开课</a>
+                                    <a href="/livecourses/Qr9Xzmf6ZvAiKHiE4" title="LL002【免费】 “人工智能”架构篇公开课" className="livecourse-title noOverflow">{this.props.course.title}</a>
                                 </div>
 
                                 <div className="livecourse-tag-container">
@@ -48,7 +44,7 @@ class Courses extends React.Component {
 
 
                                 <div className="livecourse-description twoLineEllipsis">
-                                    BitTiger的终身学习免费公开课来了！跟随硅谷趋势，把握大数据架构趋势！
+                                    {this.props.course.desc}
                                 </div>
                                 <div className="livecourse-date-range">
 
@@ -61,12 +57,11 @@ class Courses extends React.Component {
 
                             </div>
                         </div>
-                    </div>
 
 
 
-                </div>
-            </div>
+
+
         )
     }
 

@@ -20,22 +20,23 @@ const Nav=({ children }) => (
                     <div className="nav pull-right btns-navbar">
                         {Auth.isUserAuthenticated() ?
                             (
-                                <div className="btn btn-default btn-lg btn-bit" id="navbarSignUpLoginButton">
-                                    <Link to="/login" className="signinBtn">Sign in</Link>&nbsp;/ <Link className="signinBtn" id="registerAccountButton" to="/sign-up">Register</Link>
-                                </div>
-                            )
-                            :
-                            (
                                 <div className="navbar-right">
                                     <p  className="navbar-text navbar-right user" >
                                         {Auth.getEmail()}
                                     </p>
 
-                                    <Link to="/" type="button" className="btn btn-default navbar-btn" onClick={Auth.deauthenticateUser}>sign out</Link>
+                                    <Link to="/logout" type="button" className="btn btn-default navbar-btn" onClick={Auth.deauthenticateUser}>sign out</Link>
                                 </div>
 
 
+                            ):
+                            (
+                                <div className="btn btn-default btn-lg btn-bit" id="navbarSignUpLoginButton">
+                                    <Link to="/login" className="signinBtn">Sign in</Link>&nbsp;/ <Link className="signinBtn" id="registerAccountButton" to="/sign-up">Register</Link>
+                                </div>
                             )
+
+
                         }
                     </div>
 
@@ -76,7 +77,16 @@ const Nav=({ children }) => (
                                 <a href="#" className="dropdown-toggle">ABOUT<span className="caret"></span></a>
 
                             </li>
-
+                            {
+                                Auth.isUserAuthenticated()?
+                                    (
+                                        <li className="dropdown">
+                                            <Link to="/profile" className="dropdown-toggle">PROFILE<span className="caret"></span></Link>
+                                        </li>
+                                    ):(
+                                        ''
+                                )
+                            }
                         </ul>
 
                     </div>

@@ -7,7 +7,7 @@ class Auth {
 
     static isUserAuthenticated() {
 
-        return localStorage.getItem('email') == null;
+        return localStorage.getItem('email') !== null;
     }
 
     static authenticateUser(email) {

@@ -132,3 +132,7 @@ img {
     vertical-align: middle;
     border: 0
 }
+.livecourse-preview-container {
+    padding: 0;
+    margin-bottom: 20px;
+}

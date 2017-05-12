@@ -3,8 +3,10 @@
  */
 import LoginPage from './Login/LoginPage';
 import Nav from './Nav/Nav'
-import Courses from './Courses/Courses'
+import HomeCourses from './Home/HomeCourses'
 import Auth from './Auth/Auth'
+import CourseList from './ProfileCourses/CourseList'
+import LecturePage from './Lecture/LecturePage'
 
 const routes = {
     component: Nav,
@@ -13,20 +15,36 @@ const routes = {
             path: '/',
             getComponent: (location, callback) => {
                 if(Auth.isUserAuthenticated()){
-                    callback(null, LoginPage);
+                    callback(null, HomeCourses)
                 }else {
-                    callback(null, Courses)
+                    callback(null, LoginPage);
+
                 }
             }
         },
 
         {
-            path: 'login',
+            path: '/login',
             component: LoginPage
         },
         {
-           path: 'courses',
-            component: Courses
+           path: '/home',
+            component: HomeCourses
+        },
+        {
+            path: '/profile',
+            component: CourseList
+        },
+        {
+            path: '/lecture',
+            component: LecturePage
+        },
+        {
+            path: '/logout',
+            onEnter: (nextState, replace) => {
+                Auth.deauthenticateUser();
+                replace('/');
+            }
         }
 
     ]

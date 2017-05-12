@@ -35,6 +35,7 @@ class LoginPage extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
+
             body: JSON.stringify({
                 email: this.state.user.email,
                 password: this.state.user.password
@@ -50,7 +51,7 @@ class LoginPage extends React.Component {
             }
         })*/
        Auth.authenticateUser(this.state.user.email)
-       this.context.router.replace('/courses')
+       this.context.router.replace('/home')
     }
 
     changeUser(event) {
