@@ -4,17 +4,23 @@
 import React from 'react';
 import './Lecture.css'
 import LectureList from './LectureList'
+import { Link } from 'react-router'
 
 class LecturePage extends React.Component {
     constructor() {
         super();
-        this.state ={lectures: null}
+        this.state ={lectures: null, classToSend: false}
     };
 
     componentDidMount() {
         this.getLectureVideoList();
     }
 
+
+
+    handleClick() {
+        this.setState({ classToSend: !this.state.classToSend})
+    }
 
     getLectureVideoList() {
         /*
@@ -143,7 +149,26 @@ class LecturePage extends React.Component {
                                 {this.renderLectures()}
                             </div>
                         </div>
-                        <div className="col-sm-9">.col-sm-8</div>
+                        <div className="col-sm-9">
+                            <ul className="tabs tabs-divider horizontal-box">
+                                <Link to="/lecture_video" className="colored-tab tab" onClick={this.handleClick}>
+                                    Course
+                                </Link>
+                                <Link to="/question_list" className="colored-tab tab" onClick={this.handleClick}>
+                                    Discussion
+                                </Link>
+                                <div className="flex-1 align-right align-self-center">
+                                    <div className="rc-LandingPageSearchBox">
+                                        <div className="search-bar">
+                                            <div className="input-area">
+                                                <input className="search-input search-course" placeholder="Search" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+
+                        </div>
                     </div>
 
                 </div>

@@ -6,8 +6,10 @@ import Nav from './Nav/Nav'
 import HomeCourses from './Home/HomeCourses'
 import Auth from './Auth/Auth'
 import CourseList from './ProfileCourses/CourseList'
-import LecturePage from './Lecture/LecturePage'
+import LecturePage from './Lecture/LecturePage';
+import App from 'App'
 
+/*
 const routes = {
     component: Nav,
     childRoutes: [
@@ -50,4 +52,9 @@ const routes = {
     ]
 };
 
-export default routes;
+export default routes;*/
+export default (
+    <Router path="/" component={App}>
+
+    </Router>
+)
