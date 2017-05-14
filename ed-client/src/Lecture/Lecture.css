@@ -108,7 +108,9 @@ ul.tabs, ol.tabs {
 
 @media (min-width: 768px) {
     ul.tabs.tabs-divider, ol.tabs.tabs-divider {
-        border-bottom: 1px solid rgba(0,0,0,0.06);
+        border-bottom: 3px solid rgba(0,0,0,0.09);
+        padding: 3px 0
+
     }
 }
 
@@ -190,4 +192,6 @@ ul.tabs li.tab, ol.tabs li.tab, ul.tabs li.tab.selected, ol.tabs li.tab.selected
 .colored-tab {
     display: inline-block;
     padding: 0 20px;
+    color: #2ebcc5;
+    font-size: 16px;
 }

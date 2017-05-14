@@ -9,8 +9,8 @@ import { Link } from 'react-router'
 class LecturePage extends React.Component {
     constructor() {
         super();
-        this.state ={lectures: null, classToSend: false}
-    };
+        this.state ={lectures: null, questionList: null, classToSend: false};
+    }
 
     componentDidMount() {
         this.getLectureVideoList();
@@ -61,43 +61,38 @@ class LecturePage extends React.Component {
                     },
                     {
                         "title": " 第一周 实战课",
-                        "videoId": "2",
+                        "videoId": "5",
                         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
 
                     },
+
                     {
-                        "title": " 第二周 CodeLab1",
-                        "videoId": "3",
+                        "title": " 第二周 CodeLab2",
+                        "videoId": "6",
                         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
 
                     },
                     {
                         "title": " 第二周 CodeLab2",
-                        "videoId": "4",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
-
-                    },
-                    {
-                        "title": " 第二周 CodeLab2",
-                        "videoId": "4",
+                        "videoId": "7",
                         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
 
                     },
                     {
                         "title": " 第一周 实战课",
-                        "videoId": "2",
+                        "videoId": "8",
                         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
 
                     },
                     {
                         "title": " 第二周 CodeLab1",
-                        "videoId": "3",
+                        "videoId": "9",
                         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
 
                     },
                     {
                         "title": " 第二周 CodeLab2",
-                        "videoId": "4",
+                        "videoId": "10",
                         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
 
                     }
@@ -110,13 +105,26 @@ class LecturePage extends React.Component {
     };
 
 
+    chooseLecture(e) {
+        var video_key = e.target.key;
+        //let url = "http://localhost:3000/courseId/"+this.props.params.courseId+"question_list/videoId/"+video_key;
+        console.log(this.props.params.courseId);
+        console.log(video_key);
+        this.setState({
+            questionList: [
+                {
+                    title: "Multiple Nested Routes in react-router-dom v4",
 
+                }
+            ]
+        })
+    }
 
 
     renderLectures() {
         let lectures = this.state.lectures.lectureList.map(function(lecture) {
             return (
-                <li className="list-group-item course-list-item">
+                <li className="list-group-item course-list-item" key={lecture.videoId}>
                     <LectureList lecture={lecture}/>
                 </li>
             )
@@ -157,15 +165,7 @@ class LecturePage extends React.Component {
                                 <Link to="/question_list" className="colored-tab tab" onClick={this.handleClick}>
                                     Discussion
                                 </Link>
-                                <div className="flex-1 align-right align-self-center">
-                                    <div className="rc-LandingPageSearchBox">
-                                        <div className="search-bar">
-                                            <div className="input-area">
-                                                <input className="search-input search-course" placeholder="Search" value="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </ul>
 
                                 {this.props.children}

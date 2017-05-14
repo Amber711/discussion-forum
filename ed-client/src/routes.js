@@ -61,14 +61,13 @@ export default routes;*/
 export default (
     <Route path="/" component={Nav}>
         <IndexRoute component={App} />
-        <Route path="/home" component={HomeCourses}/>
-        <Route path="/profile/:userId" component={CourseList}/>
-        <Route path="/lecture/:courseId" component={LecturePage}/>
-                <Route path="/lecture_video" component={LectureVideo}/>
-                <Route path="/question_List" component={QuestionList}/>
-
-        <Route />
-        <Route path="/logout" component={LoginPage}/>
+        <Route path="/home" component={HomeCourses} />
+        <Route path="/profile/:userId" component={CourseList} />
+        <Route path="/lecture/:courseId" component={LecturePage}>
+                <Route path="/lecture_video" component={LectureVideo} />
+                <Route path="/question_List" component={QuestionList} />
+            </Route>
+        <Route path="/logout" component={LoginPage} />
 
 
     </Route>
