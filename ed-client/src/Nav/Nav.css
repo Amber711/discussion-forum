@@ -94,10 +94,19 @@ padding: 0 10px;
     margin-left: 25px;
 }
 
-
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
 
 .navbar-brand>img {
     display: block;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
 }
 a {
     background-color: transparent;
@@ -117,7 +126,7 @@ img {
 }
 .homeV1NavbarContainer .logo-bittiger {
     height: 32px;
-    margin-top: 10px;
+    margin-top: 4px;
 }
 
 @media (min-width: 768px) {
@@ -156,11 +165,28 @@ a {
     outline: 0 !important;
     text-decoration: none !important;
 }
+@media (min-width: 768px){
+    .homeV1NavbarContainer #homeV1-navbar .navbar-nav>li>a {
+        font-size: 14px !important;
+        padding: 12px;
+        margin: 12px 6px;
+    }
+}
+
+.homeV1NavbarContainer #homeV1-navbar .navbar-nav li a {
+        font-weight: normal;
+        color: #fff !important;
+    }
 
 .homeV1NavbarContainer .navbar-default {
     background-color: #656d74 !important;
     padding: 0 0 0 0;
     box-shadow: none;
+}
+.navbar-right {
+    float: right!important;
+    margin-right: -12px;
+    margin-top: 5px;
 }
 @media (min-width: 768px) {
     .homeV1NavbarContainer #homeV1-navbar .navbar-nav>li:hover>a {

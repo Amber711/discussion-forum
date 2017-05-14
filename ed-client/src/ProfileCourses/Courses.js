@@ -8,14 +8,14 @@ import { Link } from "react-router"
 import courPic1 from "../../public/fullstack.jpeg"
 
 class Courses extends React.Component {
-    constructor(props, context) {
+    /*constructor(props, context) {
         super(props, context);
-        this.courseChosen=this.courseChosen.bind(this);
-    };
+        //this.courseChosen=this.courseChosen.bind(this);
+    };*/
 
-    courseChosen() {
+   /* courseChosen() {
     this.context.replace('./lecture')
-}
+}*/
 
 
     render() {
@@ -24,9 +24,9 @@ class Courses extends React.Component {
 
                         <div className="livecourse-preview-content">
                             <div className="text-center">
-                                <div onClick={this.courseChosen}>
+                                <div>
                                     <div>
-                                        <Link to="/lecture" title="LL002【免费】 “人工智能”架构篇公开课">
+                                        <Link to={`/lecture/${this.props.course.courseId}`} title="LL002【免费】 “人工智能”架构篇公开课">
                                             <img src={courPic1} className="livecourse-img" alt="" />
                                         </Link>
                                     </div>
@@ -65,4 +65,5 @@ class Courses extends React.Component {
         )
     }
 
-}export default Courses
+}
+export default Courses

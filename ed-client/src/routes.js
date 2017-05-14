@@ -32,11 +32,11 @@ const routes = {
             component: HomeCourses
         },
         {
-            path: '/profile',
+            path: '/profile/:userId',
             component: CourseList
         },
         {
-            path: '/lecture',
+            path: '/lecture/:courseId',
             component: LecturePage
         },
         {
