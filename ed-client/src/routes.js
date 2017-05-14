@@ -1,13 +1,18 @@
 /**
  * Created by Amber on 5/9/17.
  */
-import LoginPage from './Login/LoginPage';
 import Nav from './Nav/Nav'
+import React from 'react';
+import LoginPage from './Login/LoginPage'
 import HomeCourses from './Home/HomeCourses'
-import Auth from './Auth/Auth'
 import CourseList from './ProfileCourses/CourseList'
 import LecturePage from './Lecture/LecturePage';
-import App from 'App'
+import LectureVideo from './Lecture/LectureVideo';
+import QuestionList from './Lecture/QuestionList'
+import App from './App/App'
+import { Route, IndexRoute } from 'react-router';
+
+
 
 /*
 const routes = {
@@ -54,7 +59,17 @@ const routes = {
 
 export default routes;*/
 export default (
-    <Router path="/" component={App}>
+    <Route path="/" component={Nav}>
+        <IndexRoute component={App} />
+        <Route path="/home" component={HomeCourses}/>
+        <Route path="/profile/:userId" component={CourseList}/>
+        <Route path="/lecture/:courseId" component={LecturePage}/>
+                <Route path="/lecture_video" component={LectureVideo}/>
+                <Route path="/question_List" component={QuestionList}/>
 
-    </Router>
+        <Route />
+        <Route path="/logout" component={LoginPage}/>
+
+
+    </Route>
 )

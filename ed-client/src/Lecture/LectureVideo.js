@@ -3,15 +3,15 @@
  */
 import React from "react";
 
-class QuestionList extends React.Component {
+class LectureVideo extends React.Component {
 
 
     render() {
         return (
-            <div>Question List</div>
+           <div>lecture video</div>
         )
     }
 }
 
 
-export default QuestionList
+export default LectureVideo

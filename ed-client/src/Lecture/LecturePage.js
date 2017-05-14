@@ -168,6 +168,9 @@ class LecturePage extends React.Component {
                                 </div>
                             </ul>
 
+                                {this.props.children}
+
+
                         </div>
                     </div>
 
