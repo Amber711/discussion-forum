@@ -26,7 +26,7 @@ class Courses extends React.Component {
                             <div className="text-center">
                                 <div>
                                     <div>
-                                        <Link to={`/lecture/${this.props.course.courseId}`} title="LL002【免费】 “人工智能”架构篇公开课">
+                                        <Link to={`/lecture/${this.props.course.courseId}/0`} title="LL002【免费】 “人工智能”架构篇公开课">
                                             <img src={courPic1} className="livecourse-img" alt="" />
                                         </Link>
                                     </div>

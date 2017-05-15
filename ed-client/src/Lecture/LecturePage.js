@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 class LecturePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state ={lectures: null, questionList: [], videoUrl: '',classToSend: false};
+        this.state ={lectures: null, questionList: [], classToSend: false,videoUrl: ''};
         //this.lectureClicked = this.lectureClicked.bind(this)
     }
     getChildContext() {
@@ -18,7 +18,8 @@ class LecturePage extends React.Component {
     }
 
     componentDidMount() {
-        this.getLectureVideoList();
+        this.getLectureVideoListAndQuestionList();
+
     }
 
 
@@ -27,10 +28,12 @@ class LecturePage extends React.Component {
         this.setState({ classToSend: !this.state.classToSend})
     }
 
-    getLectureVideoList() {
+    //初始化video0的quesitonList当用户第一次进入lecturePage 页面时
+    getLectureVideoListAndQuestionList() {
         /*
-        this.props.params.courseId
-        let url = "http://localhost:3000/lecture/userId/"+Auth.getEmail();
+        let courseId = this.props.params.courseId
+        let videoId = 1
+        let url = "http://localhost:3000/lecture/userId/"+Auth.getEmail()+"/"+courseId+"/"+videoId;
         let request = new Request(encodeURI(url), {
             method: 'GET',
             cache: false
@@ -44,7 +47,7 @@ class LecturePage extends React.Component {
                     {
                         "title": "第一周 理论课",
                         "videoId": "0",
-                        "url": "https://www.youtube.com/embed/Rpc7rd8C2IA"
+                        "url": "https://www.youtube.com/embed/0v1SGPpdJy8"
                     },
                     {
                         "title": " 第一周 实战课",
@@ -55,26 +58,26 @@ class LecturePage extends React.Component {
                     {
                         "title": " 第二周 CodeLab1",
                         "videoId": "2",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+                        "url": "https://www.youtube.com/embed/0ZJWdca8j6g"
 
                     },
                     {
                         "title": " 第二周 CodeLab2",
                         "videoId": "3",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+                        "url": "https://www.youtube.com/embed/WK5lxpjQjSM"
 
                     },
                     {
                         "title": " 第一周 实战课",
                         "videoId": "4",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+                        "url": "https://www.youtube.com/embed/_j0L0uxXPIs"
 
                     },
 
                     {
                         "title": " 第二周 CodeLab2",
                         "videoId": "5",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+                        "url": "https://www.youtube.com/embed/Y9HK-6MimlU"
 
                     },
                     {
@@ -104,21 +107,83 @@ class LecturePage extends React.Component {
 
                 ]
             },
-            /*videoUrl: this.state.lectures.lectureList[0].url*/
 
+            questionList: [
+            {
+                title: "Multiple Nested Routes in react-router-dom v4",
+                author: 'Nana',
+                date: 3,
+                follow: 10,
+                replies: 4,
+                id: 0
 
-        });
-        if(this.state.lectures !== null) {
+            },
+            {
+                title: "Sitecore:PredicateBuilder or Fast Query for retrieval",
+                author: 'Tony',
+                date: 2,
+                follow: 35,
+                replies: 6,
+                id: 1
+
+            },
+            {
+                title: "Android: Storage Options",
+                author: 'Nana',
+                date: 3,
+                follow: 10,
+                replies: 4,
+                id: 2
+
+            },
+            {
+                title: "Python Sklearn Linear Regression Value Error",
+                author: 'Nana',
+                date: 2,
+                follow: 35,
+                replies: 6,
+                id: 3
+
+            },
+            {
+                title: "Comparing Numerical Precision in SQL",
+                author: 'Steve',
+                date: 3,
+                follow: 10,
+                replies: 4,
+                id: 4
+
+            },
+            {
+                title: "Nested Find in JPA Insert Rethrows the Same Error",
+                author: 'Joe',
+                date: 2,
+                follow: 35,
+                replies: 6,
+                id: 5
+
+            },
+        ],
+
+        }, function(){   //-------------坑！！！-----------------------
+            console.log(this.state.lectures == null);
             this.setState({
                 videoUrl: this.state.lectures.lectureList[0].url
 
-            })
-        }
+            });
+            console.log(this.state.videoUrl);// 取不到值，setState() does not immediately mutate this.state but creates a pending state transition.
+            //Accessing this.state after calling this method can potentially return the existing value.
+
+
+        });
+
     };
 
 
+
+
     lectureClicked = (key) => {
-        //var video_key = e.target.key;
+        //var video_key = key
         //console.log(video_key)
         /*
        // both course id and video id in the request url
@@ -150,7 +215,8 @@ class LecturePage extends React.Component {
                     author: 'Lisa',
                     date: 3,
                     follow: 10,
-                    replies: 4
+                    replies: 4,
+                    id: 0
 
                 },
                 {
@@ -158,7 +224,8 @@ class LecturePage extends React.Component {
                     author: 'Tony',
                     date: 2,
                     follow: 35,
-                    replies: 6
+                    replies: 6,
+                    id: 1
 
                 },
                 {
@@ -166,7 +233,8 @@ class LecturePage extends React.Component {
                     author: 'Elva',
                     date: 3,
                     follow: 10,
-                    replies: 4
+                    replies: 4,
+                    id: 2
 
                 },
                 {
@@ -174,7 +242,8 @@ class LecturePage extends React.Component {
                     author: 'Lily',
                     date: 2,
                     follow: 35,
-                    replies: 6
+                    replies: 6,
+                    id: 3
 
                 },
                 {
@@ -182,7 +251,8 @@ class LecturePage extends React.Component {
                     author: 'Steve',
                     date: 3,
                     follow: 10,
-                    replies: 4
+                    replies: 4,
+                    id: 4
 
                 },
                 {
@@ -190,12 +260,16 @@ class LecturePage extends React.Component {
                     author: 'Joe',
                     date: 2,
                     follow: 35,
-                    replies: 6
+                    replies: 6,
+                    id: 5
 
                 },
             ],
             videoUrl: this.state.lectures.lectureList[key].url
         })
+        //return video_key
+        console.log(this.state.videoUrl)
+        //console.log(this)
     }
 
 
@@ -204,7 +278,7 @@ class LecturePage extends React.Component {
             let lectures = this.state.lectures.lectureList.map(lecture => {
                 return (
                     <li className="list-group-item course-list-item" key={lecture.videoId} onClick={() => this.lectureClicked(lecture.videoId)}>
-                        <LectureList lecture={lecture}/>
+                        <LectureList lecture={lecture} videoId={lecture.videoId} courseId={this.props.params.courseId}/>
                     </li>
                 )
             });
@@ -240,10 +314,10 @@ class LecturePage extends React.Component {
                         </div>
                         <div className="col-sm-9">
                             <ul className="tabs tabs-divider horizontal-box">
-                                <Link to={"/"+this.props.params.courseId+"/lecture_video"} className="colored-tab tab" onClick={this.handleClick}>
+                                <Link to={`/lecture/${this.props.params.courseId}/${this.props.params.videoId}`} className="colored-tab tab" onClick={this.handleClick}>
                                     Course
                                 </Link>
-                                <Link to={"/"+this.props.params.courseId+"/question_list"} className="colored-tab tab" onClick={this.handleClick}>
+                                <Link to={`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`} className="colored-tab tab" onClick={this.handleClick}>
                                     Discussion
                                 </Link>
 
@@ -275,6 +349,7 @@ class LecturePage extends React.Component {
 LecturePage.childContextTypes = {
     questionList: PropTypes.array,
     videoUrl: PropTypes.string
+    //lectures: PropTypes.object
 }
 
  export default LecturePage

@@ -4,14 +4,15 @@
 
 
 import React from "react";
-import "./Lecture.css"
+import "./Lecture.css";
+import { Link } from "react-router";
 
 class LectureList extends React.Component {
 
 
     render() {
         return (
-            <a href="#" className="course-item">{this.props.lecture.title}</a>
+            <Link to={`/lecture/${this.props.courseId}/${this.props.videoId}`} className="course-item">{this.props.lecture.title}</Link>
         )
     }
 }

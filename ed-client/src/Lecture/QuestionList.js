@@ -20,7 +20,7 @@ class QuestionList extends React.Component {
         if(this.context.questionList) {
             var question_list = this.context.questionList.map(question => {
                 return (
-                    <a href="#">
+                    <a href="#" key={question.id}>
                         <QuestionListItem question={question}/>
                     </a>
                 )

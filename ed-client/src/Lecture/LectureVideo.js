@@ -12,7 +12,7 @@ class LectureVideo extends React.Component {
         return (
             <div className="col-sm-9 video-wrapper">
                 <div className="embed-responsive embed-responsive-4by3">
-                    <iframe width="420" height="315" src="https://www.youtube.com/embed/5EE0hoPaXsA">
+                    <iframe width="420" height="315" src={this.context.videoUrl}>
                     </iframe>
                 </div>
             </div>
@@ -22,7 +22,7 @@ class LectureVideo extends React.Component {
     }
 }
 
-LectureVideo.contextType = {
+LectureVideo.contextTypes = {
     videoUrl: PropTypes.string
 }
 

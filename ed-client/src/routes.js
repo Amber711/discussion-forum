@@ -63,9 +63,9 @@ export default (
         <IndexRoute component={App} />
         <Route path="/home" component={HomeCourses} />
         <Route path="/profile/:userId" component={CourseList} />
-        <Route path="/lecture/:courseId" component={LecturePage}>
-                <Route path="/:courseId/lecture_video" component={LectureVideo} />
-                <Route path="/:courseId/question_list" component={QuestionList} />
+        <Route path="/lecture/:courseId/:videoId" component={LecturePage}>
+                <IndexRoute component={LectureVideo} />
+                <Route path="/:courseId/question_list/:videoId" component={QuestionList} />
             </Route>
         <Route path="/logout" component={LoginPage} />
 
