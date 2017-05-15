@@ -2,10 +2,36 @@
  * Created by Amber on 5/14/17.
  */
 import React from "react";
-import "./questionList.css"
+import "./QuestionList.css"
+import QuestionListItem from "./QuestionListItem";
+import PropTypes from 'prop-types'
 
 class QuestionList extends React.Component {
+    /*constructor(props) {
+        super(props); //当父组建是用 this.props.children来代表所有子组建时，子组建无法用props获得父组建的state/props数据，需要通过context.
+        this.state = {
+            questionList: props.questionList
+        }
 
+    }*/
+    renderQuestions() {
+        //var questionList= {this.props.questionList}
+        //console.log(this.context.questionList);
+        if(this.context.questionList) {
+            var question_list = this.context.questionList.map(question => {
+                return (
+                    <a href="#">
+                        <QuestionListItem question={question}/>
+                    </a>
+                )
+            });
+
+            return (
+                <li className="q-item">{question_list}</li>
+            )
+        }
+
+    }
 
     render() {
         return (
@@ -28,22 +54,67 @@ class QuestionList extends React.Component {
                 </ul>
                 <div className="col-sm-12 q-wrapper">
                     <ul className="q-list" >
-                        <li className="q-item">
+                        {this.renderQuestions()}
+
+                        {/*<li className="q-item">
                             <a href="#">
                                 <ul>
-                                    <li className="q-follow">yoyo</li>
-                                    <li className="q-title">ku</li>
-                                    <li className="q-reply">lala</li>
+                                    <li className="q-follow">
+                                        <i className="iconfont icon-wujiaoxingman"></i>
+                                        <p>Follow 25</p>
+                                    </li>
+                                    <li className="q-title">
+                                        <span>How To Excel In A Technical Job Interview</span>
+                                        <p>Lisa . 2 days age</p>
+                                    </li>
+                                    <li className="q-reply">
+                                        <i className="iconfont icon-pinglun"></i>
+                                        <span>15</span>
+                                    </li>
                                 </ul>
                             </a>
-                        </li>
+                        </li>*/}
+
+                        {/*<li className="q-item">
+                            <a href="#">
+                                <ul>
+                                    <li className="q-follow">
+                                        <i className="iconfont icon-wujiaoxingkong"></i>
+                                        <p>Follow 25</p>
+                                    </li>
+                                    <li className="q-title">
+                                        <span>How To Excel In A Technical Job Interview</span>
+                                        <p>Lisa . 2 days age</p>
+                                    </li>
+                                    <li className="q-reply">
+                                        <i className="iconfont icon-pinglun"></i>
+                                        <span>15</span>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>*/}
+
+                    </ul>
+                    <ul className="q-page">
+                        <li className="bian"><a href="#"> <strong>&lt;</strong></a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">...</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#">9</a></li>
+                        <li className="bian"><a href="#"><strong>&gt;</strong></a></li>
                     </ul>
                 </div>
-                
+
             </div>
         )
     }
 }
 
+QuestionList.contextTypes = {
+    questionList: PropTypes.array
+}
 
 export default QuestionList

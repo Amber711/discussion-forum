@@ -64,8 +64,8 @@ export default (
         <Route path="/home" component={HomeCourses} />
         <Route path="/profile/:userId" component={CourseList} />
         <Route path="/lecture/:courseId" component={LecturePage}>
-                <Route path="/lecture_video" component={LectureVideo} />
-                <Route path="/question_List" component={QuestionList} />
+                <Route path="/:courseId/lecture_video" component={LectureVideo} />
+                <Route path="/:courseId/question_list" component={QuestionList} />
             </Route>
         <Route path="/logout" component={LoginPage} />
 
