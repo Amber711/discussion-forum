@@ -133,3 +133,25 @@ li {
     cursor: not-allowed;
     pointer-events: none;
 }
+
+.question-title {
+    font-family: 'OpenSans',Arial,sans-serif;
+    margin-top:0;
+}
+
+.reply-like {
+    margin-top: 20px
+}
+
+.text-left {
+    position:relative
+}
+.author-box {
+    position: absolute;
+}
+
+.secondary-reply {
+    padding-top: 22px;
+    width: 100%;
+    padding-left: 16%;
+}
