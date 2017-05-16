@@ -32,7 +32,7 @@ class LecturePage extends React.Component {
     getLectureVideoListAndQuestionList() {
         /*
         let courseId = this.props.params.courseId
-        let videoId = 1
+        let videoId = 0
         let url = "http://localhost:3000/lecture/userId/"+Auth.getEmail()+"/"+courseId+"/"+videoId;
         let request = new Request(encodeURI(url), {
             method: 'GET',
@@ -187,6 +187,7 @@ class LecturePage extends React.Component {
         //console.log(video_key)
         /*
        // both course id and video id in the request url
+         http://localhost:3000/courseId/:courseId/videoId/:videoId
         //let url = "http://localhost:3000/courseId/"+this.props.params.courseId+"videoId/"+video_key;
         console.log(this.props.params.courseId);
         console.log(video_key);
@@ -315,7 +316,7 @@ class LecturePage extends React.Component {
                         <div className="col-sm-9">
                             <ul className="tabs tabs-divider horizontal-box">
                                 <Link to={`/lecture/${this.props.params.courseId}/${this.props.params.videoId}`} className="colored-tab tab" onClick={this.handleClick}>
-                                    Course
+                                    Lecture
                                 </Link>
                                 <Link to={`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`} className="colored-tab tab" onClick={this.handleClick}>
                                     Discussion

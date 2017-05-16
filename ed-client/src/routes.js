@@ -9,6 +9,7 @@ import CourseList from './ProfileCourses/CourseList'
 import LecturePage from './Lecture/LecturePage';
 import LectureVideo from './Lecture/LectureVideo';
 import QuestionList from './Lecture/QuestionList'
+import QuestionPage from './Lecture/QuestionPage'
 import App from './App/App'
 import { Route, IndexRoute } from 'react-router';
 
@@ -66,6 +67,7 @@ export default (
         <Route path="/lecture/:courseId/:videoId" component={LecturePage}>
                 <IndexRoute component={LectureVideo} />
                 <Route path="/:courseId/question_list/:videoId" component={QuestionList} />
+                <Route path="/:courseId/:videoId/question/:questionId" component={QuestionPage}/>
             </Route>
         <Route path="/logout" component={LoginPage} />
 

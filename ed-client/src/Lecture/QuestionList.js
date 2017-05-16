@@ -5,24 +5,25 @@ import React from "react";
 import "./QuestionList.css"
 import QuestionListItem from "./QuestionListItem";
 import PropTypes from 'prop-types'
+import { Link } from "react-router"
 
 class QuestionList extends React.Component {
-    /*constructor(props) {
-        super(props); //当父组建是用 this.props.children来代表所有子组建时，子组建无法用props获得父组建的state/props数据，需要通过context.
-        this.state = {
-            questionList: props.questionList
-        }
 
-    }*/
+
+
+    questionClicked(qId) {
+
+    }
+
     renderQuestions() {
         //var questionList= {this.props.questionList}
         //console.log(this.context.questionList);
         if(this.context.questionList) {
             var question_list = this.context.questionList.map(question => {
                 return (
-                    <a href="#" key={question.id}>
-                        <QuestionListItem question={question}/>
-                    </a>
+                    <Link to={`/${this.props.params.courseId}/${this.props.params.videoId}/question/${question.id}`} key={question.id} onClick={() => this.questionClicked(question.id)}>
+                        <QuestionListItem question={question}  />
+                    </Link>
                 )
             });
 

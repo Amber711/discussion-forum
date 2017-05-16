@@ -1,0 +1,135 @@
+li {
+    list-style: none
+}
+
+.q-detail-wrapper {
+    position: relative;
+    padding-top: 2%;
+}
+
+.filter-qs {
+    /*margin-top: 40px;*/
+    /*position: absolute;
+    left: 30px;
+    top: 12%;*/
+    color: #1a1a1a;
+    font-weight: 900;
+    margin-bottom: 10px;
+    padding: 3px;
+}
+.nav-pills>li>a {
+    border-radius: 0;
+    padding: 8px 15px;
+}
+.filter-items>a:hover {
+    border-bottom: 2px solid #3970dd !important;
+    color: #14cece;
+    background-color: #fff !important;
+}
+
+.q-desc {
+    /*margin-bottom: 65px ;*/
+}
+
+.click-to-follow {
+    display: block;
+}
+.click-to-follow:hover {
+    color: #00a0fd;
+}
+
+.author-q-desc li {
+    list-style: none;
+}
+
+.answer-icon {
+    left: -9px;
+    top: 4px;
+}
+
+.follow-icon {
+    left: 8px;
+    top: 3px;
+}
+.reply-caption span {
+    color: rgba(0,0,0,0.54);
+    font-size: 12px
+}
+
+.reply-profile {
+    padding: 2px 4px;
+    margin: 0 0 0 4px;
+    border-radius: 3px;
+    background-color: #ecf4e8;
+
+}
+
+.reply-content {
+    padding-top: 10px;
+}
+
+.action-area {
+    font-size: 12px;
+    line-height: 18px;
+    font-family: 'OpenSans',Arial,sans-serif;
+}
+
+.action-area a:hover {
+    color: #2ebcc5;
+    cursor: pointer;
+}
+
+.comment-input {
+    margin: 20px 20px 0 72px;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+}
+
+.profile-area {
+    width: 44px;
+}
+
+.reply-box {
+    box-flex: 1;
+    flex:1;
+    -webkit-box-flex: 1;
+    margin-left: 14px;
+}
+
+.edit-container {
+    width: 100%;
+    margin-bottom: 16px;
+    min-height: 90px;
+    //border: 1px solid red;
+    background: #fff;
+    position: relative;
+    border: 1px solid #e0e0e0;
+    padding: 11px 20px 11px 20px;
+
+}
+
+.reply-button-container {
+    display: flex;
+
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+
+.flex-1-reply-button {
+    box-flex: 1;
+    flex:1;
+    -webkit-box-flex: 1;
+}
+
+.reply-button {
+    background-color: #e5e5e5;
+    border: 1px solid #e5e5e5;
+    color: rgba(0,0,0,0.26);
+    cursor: not-allowed;
+    pointer-events: none;
+}

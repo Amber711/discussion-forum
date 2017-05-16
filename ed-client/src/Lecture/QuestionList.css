@@ -110,9 +110,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-wujiaoxingman:before { content: "\e621"; }
+.icon-star-filled:before { content: "\e621"; }
 
-.icon-wujiaoxingkong:before { content: "\e623"; }
+.icon-star-hollow:before { content: "\e623"; }
 
 .icon-pinglun:before { content: "\e601"; }
 /*iconfont end*/
