@@ -7,14 +7,22 @@ import './QuestionPage.css';
 
 class QuestionPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {questionDetail: null}
+    }
+
     componentDidMount() {
         //this.getSummerNote()
-        this.getQuestion();
+        this.getQuestionDetail();
 
     }
 
-    getQuestion() {
+    getQuestionDetail() {
         /*
+        //page and url before redirect: question_list page; http://localhost:3000/CS503/question_list/0 => courseId/question_list/videoId
+        //url at questinDetail page: http://localhost:3000/CS503/0/question/0  courseId videoId questionId
+
         let url = "http://localhost:3000/"+this.props.params.courseId+"/"+this.props.params.videoId+"/"+"question/"+this.props.params.questionId;
         let request = new Request(encodeURI(url), {
             method: "GET",
@@ -22,7 +30,64 @@ class QuestionPage extends React.Component {
         });
         fetch(request)
             .then(res => res.json())*/
-        this.setState({})
+        this.setState({
+            questionDetail: {
+                id: 0,
+                title: "Confused on constructing RectHV for given Node",
+                date: "2 months ago",
+                author: "Amber Lum",
+                content: `I'm confused as to how to define the axis-aligned rectangle corresponding to the node. For each node inserted, it forms two rectangles (one above and one below, or one to the right and one to the left).
+                        
+                        Which rectangle am I suppose to be thinking of when constructing the rectangle corresponding to the node?
+                        
+                        Any help would be greatly appreciated.`,
+                answers: [
+                    {
+                        username: 'Stephen Chan',
+                        email: '380914555@qq.com',
+                        date: '2 months ago',
+                        upvote: 10,
+                        content:`The above strategy works.
+                                I'm not a huge fan of having to pass 7 variables (the query point, the current node, the orientation, and the 4 points of the rectangle) in to my recursive function so if anyone came up with something cleaner I'd love to hear it.
+                                I could create a RectHV object and use that in my recursive function, but since RectHV is an immutable type, I'd have to create a new object every time I wanted to update it. That seems like a waste of memory.
+                                Any other strategies I would love to hear about.
+                                `,
+                        reply: [
+                            {
+                                username: 'Linsey',
+                                date: '1 month ago',
+                                upvote: 2,
+                                content: `I agree with your complaint. It is important to know the details of this because I believe I may be doing it wrong since I can't get the nearest neighbor search to work with my choice; even though the print I get for the circle10.txt matches the picture in the checklist. I need help too!`,
+
+                            },
+                            {
+                                username: 'Albert',
+                                date: '23 days ago',
+                                upvote: 4,
+                                content: `I am a bit confused as well.`
+                            }
+                        ]
+                    }
+                    ,
+
+                    {
+                        username: 'Stephen Chan',
+                        email: '380914555@qq.com',
+                        date: '2 months ago',
+                        upvote: 10,
+                        content:`The above strategy works.
+                                I'm not a huge fan of having to pass 7 variables (the query point, the current node, the orientation, and the 4 points of the rectangle) in to my recursive function so if anyone came up with something cleaner I'd love to hear it.
+                                I could create a RectHV object and use that in my recursive function, but since RectHV is an immutable type, I'd have to create a new object every time I wanted to update it. That seems like a waste of memory.
+                                Any other strategies I would love to hear about.
+                                `,
+                        reply: []
+                    }
+                ]
+
+
+
+            }
+        })
     }
 
 
