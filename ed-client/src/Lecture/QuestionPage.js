@@ -160,6 +160,19 @@ class QuestionPage extends React.Component {
                         {this.renderReply()}
 
                     </ul>
+                    <div className="comment-input panel-body row">
+                        <span className="profile-area">FM</span>
+                        <div className="reply-box">
+                                <textarea className="edit-container">
+                                </textarea>
+                            <div id="summernote"></div>
+                            <div className="reply-button-container">
+                                <div className="flex-1-reply-button"></div>
+                                <button className="reply-button">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             )
         }

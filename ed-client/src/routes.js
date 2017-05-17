@@ -8,8 +8,10 @@ import HomeCourses from './Home/HomeCourses'
 import CourseList from './ProfileCourses/CourseList'
 import LecturePage from './Lecture/LecturePage';
 import LectureVideo from './Lecture/LectureVideo';
-import QuestionList from './Lecture/QuestionList'
-import QuestionPage from './Lecture/QuestionPage'
+import QuestionList from './Lecture/QuestionList';
+import QuestionPage from './Lecture/QuestionPage';
+import StartDiscussion from './Lecture/StartDiscussion'
+
 import App from './App/App'
 import { Route, IndexRoute } from 'react-router';
 
@@ -68,6 +70,7 @@ export default (
                 <IndexRoute component={LectureVideo} />
                 <Route path="/:courseId/question_list/:videoId" component={QuestionList} />
                 <Route path="/:courseId/:videoId/question/:questionId" component={QuestionPage}/>
+                <Route path="/:courseId/:videoId/start_discussion" component={StartDiscussion}/>
             </Route>
         <Route path="/logout" component={LoginPage} />
 

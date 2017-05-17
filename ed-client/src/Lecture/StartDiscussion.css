@@ -1,0 +1,75 @@
+
+
+.editor-container {
+    padding: 15px;
+    margin: 20px;
+    background-color: #f9f9f9;
+    border-raidus: 7px;
+    -webkit-box-shadow: -1px 9px 24px 9px rgba(227,224,227,0.63);
+    -moz-box-shadow: -1px 9px 24px 9px rgba(227,224,227,0.63);
+    box-shadow: -1px 9px 24px 9px rgba(227,224,227,0.63);
+}
+
+.h3-title {
+    text-align: center;
+    color: #0cb1f5;
+    font-weight: bolder;
+    padding-top: 5px;
+}
+
+.h4-title {
+    padding: 8px;
+    color: #a09f9f;
+}
+
+.insert-q-title {
+    height: 40px;
+    width: 100%;
+    padding: 4px;
+
+}
+
+.editor-container textarea {
+    width: 100%
+}
+
+.editor-container h4 {
+    color: #a09f9f;
+    padding: 20px 0px;
+}
+
+.editor-container .btns a {
+
+    margin: 20px 15px 20px 0;
+}
+
+.editor-container a:hover {
+    background-color: #14cece;
+    border: none;
+    color: #fff;
+}
+
+.back-btn {
+    float: left;
+    color: #333;
+    border-color: lightgrey;
+    display: inline-block;
+    outline: 0;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+    background: #fff;
+    border-radius:60% 60%;
+    font-size: 13px;
+
+}
+
+.back-btn:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #fff;
+}

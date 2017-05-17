@@ -60,12 +60,18 @@
 #start-q {
     position: absolute;
     margin-top: 15px !important;
-    background-color: #14cece;
     font-weight: bold;
     font-size: 15px;
     outline: none;
     right: 38%;
     padding: 13px 23px;
+    border: 1px solid gainsboro;
+}
+
+.start-q-btn:hover {
+    border:none;
+    background-color: #14cece;
+    color: #fff
 }
 
 .filter-q {

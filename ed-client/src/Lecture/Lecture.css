@@ -16,6 +16,10 @@ body {
     background-color: #fff !important;
 }
 
+.tab {
+    color: #0cb1f5 !important;
+}
+
 .summary-text {
     padding: 10px 15px;
     padding-top: 20px;

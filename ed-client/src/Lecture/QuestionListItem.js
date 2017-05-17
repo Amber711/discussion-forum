@@ -68,7 +68,7 @@ class QuestionListItem extends React.Component {
                         </li>
                         <li className="q-reply">
                             <i className="iconfont icon-pinglun"></i>
-                            <span>{this.props.question.replies}</span>
+                            <span>&nbsp;&nbsp;{this.props.question.replies}</span>
                         </li>
                     </ul>
 

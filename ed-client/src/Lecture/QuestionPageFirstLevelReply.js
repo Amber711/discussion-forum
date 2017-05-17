@@ -3,11 +3,11 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import QuestionPageSecondaryReply from './QuestionPageSecondaryReply'
 
 class QuestionPageFirstLevelReply extends React.Component {
-   constructor(props, context) {
+   constructor(props) {
         super(props);
         this.state={answers: this.props.answer}
     }
@@ -159,8 +159,6 @@ class QuestionPageFirstLevelReply extends React.Component {
     }
 }
 
-QuestionPageFirstLevelReply.contextTypes = {
-    answers: PropTypes.array
-}
+
 
 export default QuestionPageFirstLevelReply

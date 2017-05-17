@@ -46,7 +46,7 @@ class QuestionList extends React.Component {
                         </div>
                     </div>
 
-                    <button className="btn btn-primary" id="start-q">Start a discussion</button>
+                    <Link to={`/${this.props.params.courseId}/${this.props.params.videoId}/start_discussion`} className="btn btn-default start-q-btn" id="start-q">Start a discussion</Link>
                 </div>
 
                 <ul className="nav nav-pills filter-q" >
