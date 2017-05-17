@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import './QuestionList.css';
+import { Link } from 'react-router';
 //import ReactDOM from 'react-dom'
 //import PropTypes from 'prop-types';
 
@@ -57,20 +58,23 @@ class QuestionListItem extends React.Component {
     render() {
         return (
 
-                    <ul>
-                        <li className="q-follow">
+                    <div>
+                        <div className="q-follow">
                             <i className="iconfont icon-star-hollow" onClick={() => this.followQuestion(event)}></i>
                             <p>Follow {this.props.question.follow}</p>
-                        </li>
-                        <li className="q-title">
-                            <span>{this.props.question.title}</span>
-                            <p>{this.props.question.author} . {this.props.question.date} days ago</p>
-                        </li>
-                        <li className="q-reply">
-                            <i className="iconfont icon-pinglun"></i>
-                            <span>&nbsp;&nbsp;{this.props.question.replies}</span>
-                        </li>
-                    </ul>
+                        </div>
+                        <Link to={`/${this.props.courseId}/${this.props.videoId}/question/${this.props.question.id}`} className="q-clicked">
+                            <div className="q-title">
+                                <span>{this.props.question.title}</span>
+                                <p>{this.props.question.author} . {this.props.question.date} days ago</p>
+                            </div>
+                            <div className="q-reply">
+                                <i className="iconfont icon-pinglun"></i>
+                                <span>&nbsp;&nbsp;{this.props.question.replies}</span>
+                            </div>
+                        </Link>
+
+                    </div>
 
         )
     }

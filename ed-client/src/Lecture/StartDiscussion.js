@@ -70,7 +70,7 @@ class StartDiscussion extends React.Component {
             <div className="container">
                 <div className="editor-container">
 
-                    <h3 className="h3-title"><a href="#" className="back-btn glyphicon glyphicon-arrow-left"></a>Start a new discussion</h3>
+                    <h3 className="h3-title"><Link to={`/${this.props.params.courseId}/question_list/${this.props.params.video}`} href="#" className="back-btn glyphicon glyphicon-arrow-left"></Link>Start a new discussion</h3>
 
                     <h4 className="h4-title">Title</h4>
 

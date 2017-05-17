@@ -125,6 +125,7 @@
 
 .iconfont {
     font-size:24px;
+    background-color: transparent;
 }
 .q-list *{
     margin:0;
@@ -148,10 +149,18 @@
 .q-list .q-item a span{
     font-size:16px;
 }
+
+.q-clicked {
+    margin-left: 8%;
+}
+
 .q-follow {
     float:left;
     text-align:center;
+    padding-top: 20px
 }
+
+
 .q-follow p{
     margin-top:10px;
 }

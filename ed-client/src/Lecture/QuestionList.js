@@ -21,9 +21,9 @@ class QuestionList extends React.Component {
         if(this.context.questionList) {
             var question_list = this.context.questionList.map(question => {
                 return (
-                    <Link to={`/${this.props.params.courseId}/${this.props.params.videoId}/question/${question.id}`} key={question.id} onClick={() => this.questionClicked(question.id)}>
-                        <QuestionListItem question={question}  />
-                    </Link>
+                    <div key={question.id} onClick={() => this.questionClicked(question.id)}>
+                        <QuestionListItem question={question} courseId={this.props.params.courseId} videoId={this.props.params.videoId} />
+                    </div>
                 )
             });
 
