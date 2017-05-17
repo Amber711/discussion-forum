@@ -26,7 +26,16 @@ router.post("/profile", jsonParser, function (req, res) {
 router.get("/lecture/:courseId", function (req, res) {
   var courseId = req.params.courseId;
   lectureService.getLectureListForCourse(courseId)
-    .then(lectureList => res.json(lectureList));
+    .then(lectures => res.json(lectures.lectureList));
+});
+
+router.post("/lecture", jsonParser, function (req, res) {
+  lectureService.addCourse(req.body)
+    .then(function (lectureList) {
+      res.json(lectureList);
+    }, function (error) {
+      res.status(400).send("user email already exists!");
+    });
 });
 
 // router.post('/build_and_run', jsonParser, function(req, res) {
