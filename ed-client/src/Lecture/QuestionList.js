@@ -18,7 +18,7 @@ class QuestionList extends React.Component {
         }
 
         this.getQuestionList = this.getQuestionList.bind(this);
-        //this.questionClicked = this.questionClicked.bind(this)
+        this.toQuestionPage = this.toQuestionPage.bind(this)
     }
 
     componentDidMount() {
@@ -42,36 +42,45 @@ class QuestionList extends React.Component {
                 // clear the previous question list !!!!!!!!
                 console.log('....qList', qList);
                 // console.log(this.state.lectures.lectureList[this.context.videoKey].url);
-                this.state.questionList.length = 0;
-                console.log('------------------', this.state.questionList.length == 0)
+                //this.state.questionList.length = 0;
+                //console.log('------------------', this.state.questionList.length == 0)
                 this.setState({
-                    questionList: qList,
-                    //videoUrl: this.state.lectures.lectureList[this.context.videoKey].url
-                },function () {
-                    //sync questionlist to lecture page
+                    questionList: []
+                }, function(){
+                    console.log('------------------', this.state.questionList.length == 0)
+                    this.setState({
+                        questionList: qList,
+                        //videoUrl: this.state.lectures.lectureList[this.context.videoKey].url
+                    },function () {
+                        //sync questionlist to lecture page
 
-                    this.context.getQuestionListFromChild(this.state.questionList)
+                        this.context.getQuestionListFromChild(this.state.questionList)
+                    })
                 })
+
 
 
             })
 
     }
 
-    /*questionClicked(questionId) {
+
+
+    toQuestionPage(questionId) {
+        var url = '/' + this.props.params.courseId + "/"+"question/"+questionId
+        this.context.router.replace(url)
 
     }
-*/
     renderQuestions() {
         //var questionList= {this.props.questionList}
         //console.log(this.context.questionList);
-        console.log('~~~~~~~~~',this.state.questionList)
+        console.log('~~~~~~~~~',this.state.questionList);
         //if(this.state.questionList !== []) {
         var question_list = this.state.questionList.map(question => {
             return (
-                <Link to={`/${this.props.params.courseId}/${this.props.params.courseId}/question/${question.id}`} key={question.id} className="q-list-item">
+                <div onClick={()=> this.toQuestionPage(question.id)} key={question.id}>
                     <QuestionListItem question={question} courseId={this.props.params.courseId} videoId={this.props.params.videoId} />
-                </Link>
+                </div>
             )
         });
 
@@ -127,6 +136,7 @@ class QuestionList extends React.Component {
 
 QuestionList.contextTypes = {
     //questionList: PropTypes.array,
+    router: PropTypes.object.isRequired,
     videoKey: PropTypes.number,
     getQuestionListFromChild: PropTypes.func
 }
