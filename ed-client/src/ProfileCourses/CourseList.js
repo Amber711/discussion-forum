@@ -4,6 +4,7 @@
 import React from 'react';
 import "./Courses.css"
 import Courses from './Courses'
+import Auth from '../Auth/Auth'
 
 class CourseList extends React.Component {
     constructor() {
@@ -17,24 +18,20 @@ class CourseList extends React.Component {
 
     loadUserCourses() {
 
-        /*let userId = Auth.getEmail();
-        let url = "http://localhost:3000/profile/"+userId;
+        let userId = Auth.getEmail();
+        let url = "http://localhost:4000/api/v1/profile/"+userId;
         let request = new Request(encodeURI(url), {
             method: 'GET',
-           /!* headers: {
-                'Authorization': 'bearer ' + Auth.getToken(),
-            },*!/
             cache: false
         });
 
         fetch(request)
             .then(res => res.json())
-            .then( courses => {
-                // ignore the possibility when user haven't subscribed to or bought any courses.
+            .then( lectureList => {
                 this.setState({
-                    courses: courses
-            })*/
-        this.setState({
+                    courses: lectureList
+            })
+       /* this.setState({
             courses: [
                 {
                     courseId:"CS503",
@@ -59,8 +56,9 @@ class CourseList extends React.Component {
                 }
 
             ]
-        })
-    }
+        })*/
+    })
+    };
 
     renderCourses() {
         var course_list = this.state.courses.map(function(course) {

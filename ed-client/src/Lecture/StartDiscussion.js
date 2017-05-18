@@ -21,7 +21,9 @@ class StartDiscussion extends React.Component {
         var val = event.target.value
         var newDiscussion = this.state.newDiscussion;
         newDiscussion[item] = val
-
+        /*
+        *new Discussion = {'title': '', 'content'}
+        * */
         this.setState({
             newDiscussion
         }, function(){
@@ -34,13 +36,14 @@ class StartDiscussion extends React.Component {
 
 
     postNewDiscussion() {
+            var courseId = this.props.params.courseId;
+            var videoId = this.props.params.videoId;
         /* remember to go back here and do the validation*/
         if(confirm('Are you sure to start this discussion?')){
-            var date = Date.now();
-            console.log('date-----:', date)
+            //var date = Date.now(); deal with it later on
 
 
-           /*fetch(`http://localhost:3000/${this.props.params.courseId}/${this.props.params.videoId}/start_discussion`, {
+           fetch(`http://localhost:4000/api/v1/${this.props.params.courseId}/${this.props.params.videoId}/new_discussion`, {
                method: 'POST',
                cache: false,
                headers: {
@@ -48,19 +51,31 @@ class StartDiscussion extends React.Component {
                    'Content-Type': 'application/json',
                },
                body: JSON.stringify({
+                        courseId: courseId,
+                        videoId: videoId,
                         title: this.state.newDiscussion.title,
-                        author: author:Auth.getEmail(),
-                        date: date,
+                        author: Auth.getEmail(),
+                        date: 0,
+                        //id: this.context.questionList.length + 1,
                         content: this.state.newDiscussion.content
                 })
            }).then(response => {  //back end plz remember to add 'id' before store data into db. id is the number of the question
                 if(response.status === 200 ) {
-                   response.json().then(function (json) {
-                       this.context.router.replace(`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`)
-                   })
+                        //alert("Success!")
+                   //response.json().then(function (json) {
+                       //this.context.router.replace(`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`)
+                    var url = "/"+courseId+'/discussion/'+videoId
+                    console.log(url, typeof url)
+                    this.context.router.replace(url)
+                   //})
                 }
-            })*/
-            this.context.router.replace(`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`)
+            });
+        /*
+           var newDiscussion = this.state.newDiscussion;
+            newDiscussion['author'] = Auth.getEmail()
+            var id = questionList.length
+            */
+            //this.context.router.replace(`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`)
 
         }
     }
@@ -70,7 +85,7 @@ class StartDiscussion extends React.Component {
             <div className="container">
                 <div className="editor-container">
 
-                    <h3 className="h3-title"><Link to={`/${this.props.params.courseId}/question_list/${this.props.params.video}`} href="#" className="back-btn glyphicon glyphicon-arrow-left"></Link>Start a new discussion</h3>
+                    <h3 className="h3-title"><Link to={`/${this.props.params.courseId}/discussion/${this.props.params.video}`} href="#" className="back-btn glyphicon glyphicon-arrow-left"></Link>Start a new discussion</h3>
 
                     <h4 className="h4-title">Title</h4>
 
@@ -92,7 +107,10 @@ class StartDiscussion extends React.Component {
 }
 
 StartDiscussion.contextTypes = {
-    router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
+    questionList: PropTypes.array
+
 }
+
 
 export default StartDiscussion

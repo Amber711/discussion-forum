@@ -6,176 +6,195 @@ import './Lecture.css'
 import LectureList from './LectureList'
 import { Link } from 'react-router'
 import PropTypes from 'prop-types';
+import Auth from '../Auth/Auth'
 
 class LecturePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state ={lectures: null, questionList: [], classToSend: false,videoUrl: ''};
-        //this.lectureClicked = this.lectureClicked.bind(this)
+        this.state ={lectures: null, questionList: [], classToSend: false,videoUrl: '', videoKey: 0};
+
+        this.getQuestionListFromChild = this.getQuestionListFromChild.bind(this)
     }
     getChildContext() {
-        return {questionList: this.state.questionList, videoUrl: this.state.videoUrl}
+        return {videoUrl: this.state.videoUrl, videoKey: this.state.videoKey, getQuestionListFromChild: this.getQuestionListFromChild}
     }
 
     componentDidMount() {
-        this.getLectureVideoListAndQuestionList();
+        this.getLectureVideoList();
+        //this.getInitialDiscussionList();
 
     }
 
+    getQuestionListFromChild(questionList) {
 
+        this.setState({questionList}, function () {
 
-    handleClick() {
-        this.setState({ classToSend: !this.state.classToSend})
+            console.log('........lecture page received quesitonList via QuestionList component:', this.state.questionList)
+        })
     }
 
     //初始化video0的quesitonList当用户第一次进入lecturePage 页面时
-    getLectureVideoListAndQuestionList() {
-        /*
-        let courseId = this.props.params.courseId
-        let videoId = 0
-        let url = "http://localhost:3000/lecture/userId/"+Auth.getEmail()+"/"+courseId+"/"+videoId;
+    getLectureVideoList() {
+
+        let courseId = this.props.params.courseId;
+        let url = "http://localhost:4000/api/v1/lecture/"+courseId+"/0";
         let request = new Request(encodeURI(url), {
             method: 'GET',
             cache: false
         });
+
+
         fetch(request)
-            .then(res)*/
-        this.setState({
-            lectures: {
-                name: "503 全栈工程师直通车",
-                lectureList: [
-                    {
-                        "title": "第一周 理论课",
-                        "videoId": "0",
-                        "url": "https://www.youtube.com/embed/0v1SGPpdJy8"
-                    },
-                    {
-                        "title": " 第一周 实战课",
-                        "videoId": "1",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
-
-                    },
-                    {
-                        "title": " 第二周 CodeLab1",
-                        "videoId": "2",
-                        "url": "https://www.youtube.com/embed/0ZJWdca8j6g"
-
-                    },
-                    {
-                        "title": " 第二周 CodeLab2",
-                        "videoId": "3",
-                        "url": "https://www.youtube.com/embed/WK5lxpjQjSM"
-
-                    },
-                    {
-                        "title": " 第一周 实战课",
-                        "videoId": "4",
-                        "url": "https://www.youtube.com/embed/_j0L0uxXPIs"
-
-                    },
-
-                    {
-                        "title": " 第二周 CodeLab2",
-                        "videoId": "5",
-                        "url": "https://www.youtube.com/embed/Y9HK-6MimlU"
-
-                    },
-                    {
-                        "title": " 第二周 CodeLab2",
-                        "videoId": "6",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
-
-                    },
-                    {
-                        "title": " 第一周 实战课",
-                        "videoId": "7",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
-
-                    },
-                    {
-                        "title": " 第二周 CodeLab1",
-                        "videoId": "8",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
-
-                    },
-                    {
-                        "title": " 第二周 CodeLab2",
-                        "videoId": "10",
-                        "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
-
-                    }
-
-                ]
-            },
-
-            questionList: [
-            {
-                title: "Multiple Nested Routes in react-router-dom v4",
-                author: 'Nana',
-                date: 3,
-                follow: 10,
-                replies: 4,
-                id: 0
-
-            },
-            {
-                title: "Sitecore:PredicateBuilder or Fast Query for retrieval",
-                author: 'Tony',
-                date: 2,
-                follow: 35,
-                replies: 6,
-                id: 1
-
-            },
-            {
-                title: "Android: Storage Options",
-                author: 'Nana',
-                date: 3,
-                follow: 10,
-                replies: 4,
-                id: 2
-
-            },
-            {
-                title: "Python Sklearn Linear Regression Value Error",
-                author: 'Nana',
-                date: 2,
-                follow: 35,
-                replies: 6,
-                id: 3
-
-            },
-            {
-                title: "Comparing Numerical Precision in SQL",
-                author: 'Steve',
-                date: 3,
-                follow: 10,
-                replies: 4,
-                id: 4
-
-            },
-            {
-                title: "Nested Find in JPA Insert Rethrows the Same Error",
-                author: 'Joe',
-                date: 2,
-                follow: 35,
-                replies: 6,
-                id: 5
-
-            },
-        ],
-
-        }, function(){   //-------------坑！！！-----------------------
-            console.log(this.state.lectures == null);
-            this.setState({
-                videoUrl: this.state.lectures.lectureList[0].url
+            .then(res => res.json())
+            .then( lectures => {
+                    console.log('lecture page lecture list~~~~~:', lectures);
+                    console.log('lecture page----', lectures.lectureList);
+                this.setState({
+                    lectures: lectures,
+                    videoUrl: lectures.lectureList[0].url
+                })
 
             });
-            console.log(this.state.videoUrl);// 取不到值，setState() does not immediately mutate this.state but creates a pending state transition.
-            //Accessing this.state after calling this method can potentially return the existing value.
 
 
-        });
+        /*  this.setState({
+         lectures: {
+         name: "503 全栈工程师直通车",
+         lectureList: [
+         {
+         "title": "第一周 理论课",
+         "videoId": "0",
+         "url": "https://www.youtube.com/embed/0v1SGPpdJy8"
+         },
+         {
+         "title": " 第一周 实战课",
+         "videoId": "1",
+         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+
+         },
+         {
+         "title": " 第二周 CodeLab1",
+         "videoId": "2",
+         "url": "https://www.youtube.com/embed/0ZJWdca8j6g"
+
+         },
+         {
+         "title": " 第二周 CodeLab2",
+         "videoId": "3",
+         "url": "https://www.youtube.com/embed/WK5lxpjQjSM"
+
+         },
+         {
+         "title": " 第一周 实战课",
+         "videoId": "4",
+         "url": "https://www.youtube.com/embed/_j0L0uxXPIs"
+
+         },
+
+         {
+         "title": " 第二周 CodeLab2",
+         "videoId": "5",
+         "url": "https://www.youtube.com/embed/Y9HK-6MimlU"
+
+         },
+         {
+         "title": " 第二周 CodeLab2",
+         "videoId": "6",
+         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+
+         },
+         {
+         "title": " 第一周 实战课",
+         "videoId": "7",
+         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+
+         },
+         {
+         "title": " 第二周 CodeLab1",
+         "videoId": "8",
+         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+
+         },
+         {
+         "title": " 第二周 CodeLab2",
+         "videoId": "10",
+         "url": "https://www.youtube.com/embed/5EE0hoPaXsA"
+
+         }
+
+         ]
+         },
+
+         questionList: [
+         {
+         title: "Multiple Nested Routes in react-router-dom v4",
+         author: 'Nana',
+         date: 3,
+         follow: 10,
+         replies: 4,
+         id: 0
+
+         },
+         {
+         title: "Sitecore:PredicateBuilder or Fast Query for retrieval",
+         author: 'Tony',
+         date: 2,
+         follow: 35,
+         replies: 6,
+         id: 1
+
+         },
+         {
+         title: "Android: Storage Options",
+         author: 'Nana',
+         date: 3,
+         follow: 10,
+         replies: 4,
+         id: 2
+
+         },
+         {
+         title: "Python Sklearn Linear Regression Value Error",
+         author: 'Nana',
+         date: 2,
+         follow: 35,
+         replies: 6,
+         id: 3
+
+         },
+         {
+         title: "Comparing Numerical Precision in SQL",
+         author: 'Steve',
+         date: 3,
+         follow: 10,
+         replies: 4,
+         id: 4
+
+         },
+         {
+         title: "Nested Find in JPA Insert Rethrows the Same Error",
+         author: 'Joe',
+         date: 2,
+         follow: 35,
+         replies: 6,
+         id: 5
+
+         },
+         ],
+
+         }, function(){   //-------------坑！！！-----------------------
+         console.log(this.state.lectures == null);
+         this.setState({
+         videoUrl: this.state.lectures.lectureList[0].url
+
+         });
+         console.log(this.state.videoUrl);// 取不到值，setState() does not immediately mutate this.state but creates a pending state transition.
+         //Accessing this.state after calling this method can potentially return the existing value.
+
+
+         });*/
+
+
 
     };
 
@@ -183,14 +202,44 @@ class LecturePage extends React.Component {
 
 
     lectureClicked = (key) => {
-        //var video_key = key
-        //console.log(video_key)
-        /*
+        this.setState({
+            videoKey: key
+
+        },function(){
+            this.setState({
+                videoUrl: this.state.lectures.lectureList[this.state.videoKey].url
+            })
+            }/*, function() {
+            let courseId = this.props.params.courseId;
+            let url = "http://localhost:4000/api/v1/lecture/"+courseId+"/"+this.state.videoKey;
+            let request = new Request(encodeURI(url), {
+                method: 'GET',
+                cache: false
+            });
+
+
+            fetch(request)
+                .then(res => res.json())
+                .then( lectures => {
+                    console.log('lecture page lecture list~~~~~:', lectures);
+                    console.log('lecture page----', lectures.lectureList);
+                    this.setState({
+                        lectures: lectures,
+                        videoUrl: lectures.lectureList[].url
+                    })
+
+                });
+        }*/
+        );
+
+
        // both course id and video id in the request url
-         http://localhost:3000/courseId/:courseId/videoId/:videoId
-        //let url = "http://localhost:3000/courseId/"+this.props.params.courseId+"videoId/"+video_key;
+         //http://localhost:3000/courseId/:courseId/videoId/:videoId
+/*
+        let url = "http://localhost:4000/api/v1/"+this.props.params.courseId+"/question_list/"+video_key;
         console.log(this.props.params.courseId);
         console.log(video_key);
+
         let request = new Request(encodeURI(url), {
             method: "GET",
             cache: false
@@ -200,16 +249,19 @@ class LecturePage extends React.Component {
             .then( res => res.json())
             .then(qList => {
                 // clear the previous question list !!!!!!!!
-                if(this.state.questionList !== [] ){
-                    this.state.questionList.length = 0;
+                    console.log('....qList', qList);
+                    console.log(this.state.lectures.lectureList[key].url);
+                    this.setState({
+                    questionList: qList,
+                    videoUrl: this.state.lectures.lectureList[key].url
 
                     })
-                    this.setState({
-                    questionList: qList
-                }
-            });*/
-        console.log(key);
-        this.setState({
+            })
+
+*/
+
+
+       /* this.setState({
             questionList: [
                 {
                     title: "Multiple Nested Routes in react-router-dom v4",
@@ -267,10 +319,7 @@ class LecturePage extends React.Component {
                 },
             ],
             videoUrl: this.state.lectures.lectureList[key].url
-        })
-        //return video_key
-        console.log(this.state.videoUrl)
-        //console.log(this)
+        })*/
     }
 
 
@@ -315,10 +364,10 @@ class LecturePage extends React.Component {
                         </div>
                         <div className="col-sm-9">
                             <ul className="tabs tabs-divider horizontal-box">
-                                <Link to={`/lecture/${this.props.params.courseId}/${this.props.params.videoId}`} className="colored-tab tab" onClick={this.handleClick}>
+                                <Link to={`/lecture/${this.props.params.courseId}/${this.props.params.videoId}`} className="colored-tab tab">
                                     Lecture
                                 </Link>
-                                <Link to={`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`} className="colored-tab tab" onClick={this.handleClick}>
+                                <Link to={`/${this.props.params.courseId}/discussion/${this.props.params.videoId}`} className="colored-tab tab">
                                     Discussion
                                 </Link>
 
@@ -348,8 +397,10 @@ class LecturePage extends React.Component {
 }
 
 LecturePage.childContextTypes = {
-    questionList: PropTypes.array,
-    videoUrl: PropTypes.string
+    //questionList: PropTypes.array,
+    videoUrl: PropTypes.string,
+    videoKey: PropTypes.number,
+    getQuestionListFromChild: PropTypes.func
     //lectures: PropTypes.object
 }
 

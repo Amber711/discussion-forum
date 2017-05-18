@@ -182,6 +182,8 @@
 
 /*page*/
 .q-page {
+    text-align: center;
+    padding-top:10px;
 
 }
 .q-page * {
@@ -202,9 +204,13 @@
     border:1px solid #e6e6e6;
 }
 .q-page li {
-    float:left;
+    display: inline-block
 }
 
 .q-list .q-item a {
     padding-bottom: 76px;
+}
+
+.q-list-item {
+    display: block
 }

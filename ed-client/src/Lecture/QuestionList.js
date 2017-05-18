@@ -9,28 +9,76 @@ import { Link } from "react-router"
 
 class QuestionList extends React.Component {
 
+    constructor(props,context) {
+        super(props,context);
+
+        this.state = {
+            videoKey: this.context.videoKey,
+            questionList: []
+        }
+
+        this.getQuestionList = this.getQuestionList.bind(this);
+        //this.questionClicked = this.questionClicked.bind(this)
+    }
+
+    componentDidMount() {
+        this.getQuestionList()
+    }
 
 
-    questionClicked(qId) {
+    getQuestionList() {
+        let url = "http://localhost:4000/api/v1/"+this.props.params.courseId+"/question_list/"+this.state.videoKey;
+        console.log(this.props.params.courseId);
+        //console.log(video_key);
+
+        let request = new Request(encodeURI(url), {
+            method: "GET",
+            cache: false
+        });
+
+        fetch(request)
+            .then( res => res.json())
+            .then(qList => {
+                // clear the previous question list !!!!!!!!
+                console.log('....qList', qList);
+                // console.log(this.state.lectures.lectureList[this.context.videoKey].url);
+                this.state.questionList.length = 0;
+                console.log('------------------', this.state.questionList.length == 0)
+                this.setState({
+                    questionList: qList,
+                    //videoUrl: this.state.lectures.lectureList[this.context.videoKey].url
+                },function () {
+                    //sync questionlist to lecture page
+
+                    this.context.getQuestionListFromChild(this.state.questionList)
+                })
+
+
+            })
 
     }
 
+    /*questionClicked(questionId) {
+
+    }
+*/
     renderQuestions() {
         //var questionList= {this.props.questionList}
         //console.log(this.context.questionList);
-        if(this.context.questionList) {
-            var question_list = this.context.questionList.map(question => {
-                return (
-                    <div key={question.id} onClick={() => this.questionClicked(question.id)}>
-                        <QuestionListItem question={question} courseId={this.props.params.courseId} videoId={this.props.params.videoId} />
-                    </div>
-                )
-            });
-
+        console.log('~~~~~~~~~',this.state.questionList)
+        //if(this.state.questionList !== []) {
+        var question_list = this.state.questionList.map(question => {
             return (
-                <li className="q-item">{question_list}</li>
+                <Link to={`/${this.props.params.courseId}/${this.props.params.courseId}/question/${question.id}`} key={question.id} className="q-list-item">
+                    <QuestionListItem question={question} courseId={this.props.params.courseId} videoId={this.props.params.videoId} />
+                </Link>
             )
-        }
+        });
+
+        return (
+            <li className="q-item">{question_list}</li>
+        )
+        //}
 
     }
 
@@ -55,45 +103,8 @@ class QuestionList extends React.Component {
                 </ul>
                 <div className="col-sm-12 q-wrapper">
                     <ul className="q-list" >
+
                         {this.renderQuestions()}
-
-                        {/*<li className="q-item">
-                            <a href="#">
-                                <ul>
-                                    <li className="q-follow">
-                                        <i className="iconfont icon-wujiaoxingman"></i>
-                                        <p>Follow 25</p>
-                                    </li>
-                                    <li className="q-title">
-                                        <span>How To Excel In A Technical Job Interview</span>
-                                        <p>Lisa . 2 days age</p>
-                                    </li>
-                                    <li className="q-reply">
-                                        <i className="iconfont icon-pinglun"></i>
-                                        <span>15</span>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>*/}
-
-                        {/*<li className="q-item">
-                            <a href="#">
-                                <ul>
-                                    <li className="q-follow">
-                                        <i className="iconfont icon-wujiaoxingkong"></i>
-                                        <p>Follow 25</p>
-                                    </li>
-                                    <li className="q-title">
-                                        <span>How To Excel In A Technical Job Interview</span>
-                                        <p>Lisa . 2 days age</p>
-                                    </li>
-                                    <li className="q-reply">
-                                        <i className="iconfont icon-pinglun"></i>
-                                        <span>15</span>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>*/}
 
                     </ul>
                     <ul className="q-page">
@@ -115,7 +126,9 @@ class QuestionList extends React.Component {
 }
 
 QuestionList.contextTypes = {
-    questionList: PropTypes.array
+    //questionList: PropTypes.array,
+    videoKey: PropTypes.number,
+    getQuestionListFromChild: PropTypes.func
 }
 
 export default QuestionList

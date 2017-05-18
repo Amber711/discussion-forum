@@ -2,15 +2,22 @@ var ProfileCoursesModel = require("../models/profileCoursesModel");
 
 var getCourseListForUser = function (userId) {
   return new Promise((resolve,reject) => {
-    ProfileCoursesModel.findOne({userId: userId}, function (err, courseList) {
+    ProfileCoursesModel.findOne({userId: userId}, function (err, lectureObj) {
       if (err) {
         reject(err);
       } else {
-        resolve(courseList);
+        console.log('~~~', lectureObj.lectureList);
+        resolve(lectureObj.lectureList);
       }
     });
   });
-}
+};
+
+
+
+
+
+
 
 var addUser = function (newUser) {
   return new Promise((resolve,reject) => {

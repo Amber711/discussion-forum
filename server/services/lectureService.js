@@ -1,17 +1,26 @@
-var CourseLectureModel = require("../models/courseLectureModel");
+var CourseLectureModel = require("../models/lecturePageLectureListModel");
 
 var getLectureListForCourse = function (courseId) {
   return new Promise((resolve,reject) => {
   //  resolve(lectures.find(lecture => lecture.courseId = courseId));
-    CourseLectureModel.findOne({courseId: courseId}, function (err, lectureList) {
+    CourseLectureModel.findOne({courseId: courseId}, function (err, lectureObj) {
       if (err) {
         reject(err);
       } else {
-        resolve(lectureList);
+        var lecturePageList = {name: lectureObj.name, lectureList: lectureObj.lectureList};
+        console.log('---------------------------lectureObj', lecturePageList);
+
+        resolve(lecturePageList);
       }
     });
   });
 }
+
+
+
+
+
+
 
 var addCourse = function (newCourse) {
   return new Promise((resolve,reject) => {

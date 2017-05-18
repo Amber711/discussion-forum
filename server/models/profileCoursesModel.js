@@ -1,9 +1,8 @@
 var mongoose = require("mongoose");
 
 var ProfileCoursesSchema = mongoose.Schema({
-  userId: Number,
-  email: String,
-  courseList: [{
+  userId: String,
+  lectureList: [{
     courseId: String,
     title: String,
     desc: String,
