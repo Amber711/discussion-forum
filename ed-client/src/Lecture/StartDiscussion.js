@@ -50,32 +50,26 @@ class StartDiscussion extends React.Component {
                    'Accept': 'application/json',
                    'Content-Type': 'application/json',
                },
+               //console.log('at start discussion questionList from lecture page', this.context.questionList)
                body: JSON.stringify({
                         courseId: courseId,
                         videoId: videoId,
                         title: this.state.newDiscussion.title,
                         author: Auth.getEmail(),
                         date: 0,
-                        //id: this.context.questionList.length + 1,
+                        id: this.context.questionList.length + 1,
                         content: this.state.newDiscussion.content
                 })
            }).then(response => {  //back end plz remember to add 'id' before store data into db. id is the number of the question
                 if(response.status === 200 ) {
-                        //alert("Success!")
-                   //response.json().then(function (json) {
-                       //this.context.router.replace(`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`)
-                    var url = "/"+courseId+'/discussion/'+videoId
-                    console.log(url, typeof url)
-                    this.context.router.replace(url)
-                   //})
+
+                    var url = "/"+courseId+'/discussion/'+videoId;
+                    console.log(url, typeof url);
+                    this.context.router.replace(url);
+
                 }
             });
-        /*
-           var newDiscussion = this.state.newDiscussion;
-            newDiscussion['author'] = Auth.getEmail()
-            var id = questionList.length
-            */
-            //this.context.router.replace(`/${this.props.params.courseId}/question_list/${this.props.params.videoId}`)
+
 
         }
     }

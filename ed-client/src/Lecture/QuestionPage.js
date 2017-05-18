@@ -10,7 +10,14 @@ class QuestionPage extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {questionDetail: {},questionDesc: {}}
+        this.state = {
+            questionDetail: {},
+            questionDesc: {},
+            condition: false,
+            star: "iconfont icon-star-hollow",
+            follow: this.props.question.follow
+        }
+        this.followQuestion = this.followQuestion.bind(this)
     }
 
     getChildContext() {
@@ -43,6 +50,30 @@ class QuestionPage extends React.Component {
                 })
             })
 
+
+
+
+    }
+
+    followQuestion() {
+        //console.log('~~~',event.target.className);
+        console.log('-----enter follow question func')
+        this.setState({
+            condition: !this.state.condition
+        }, function(){
+            if(this.state.condition) {
+                this.setState({
+                    star: "iconfont icon-star-filled",
+                    follow: this.state.follow + 1
+                });
+            } else {
+                this.setState({
+                    star: "iconfont icon-star-hollow",
+                    follow: this.state.follow - 1
+                })
+
+            }
+        });
 
 
 
@@ -87,7 +118,7 @@ class QuestionPage extends React.Component {
                             <li className="col-md-2 pull-right text-center">
                                 <a href="#" className="click-to-follow">
                                     Follow
-                                    <span className="glyphicon glyphicon-star-empty follow-icon" aria-hidden="true"></span>
+                                    <span className={this.state.star} onClick={() => this.followQuestion()}></span>
 
                                 </a>
                                 <a href="#" className="click-to-follow">

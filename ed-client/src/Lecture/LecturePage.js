@@ -16,7 +16,7 @@ class LecturePage extends React.Component {
         this.getQuestionListFromChild = this.getQuestionListFromChild.bind(this)
     }
     getChildContext() {
-        return {videoUrl: this.state.videoUrl, videoKey: this.state.videoKey, getQuestionListFromChild: this.getQuestionListFromChild}
+        return {questionList:this.state.questionList,videoUrl: this.state.videoUrl, videoKey: this.state.videoKey, getQuestionListFromChild: this.getQuestionListFromChild}
     }
 
     componentDidMount() {
@@ -209,56 +209,10 @@ class LecturePage extends React.Component {
             this.setState({
                 videoUrl: this.state.lectures.lectureList[this.state.videoKey].url
             })
-            }/*, function() {
-            let courseId = this.props.params.courseId;
-            let url = "http://localhost:4000/api/v1/lecture/"+courseId+"/"+this.state.videoKey;
-            let request = new Request(encodeURI(url), {
-                method: 'GET',
-                cache: false
-            });
-
-
-            fetch(request)
-                .then(res => res.json())
-                .then( lectures => {
-                    console.log('lecture page lecture list~~~~~:', lectures);
-                    console.log('lecture page----', lectures.lectureList);
-                    this.setState({
-                        lectures: lectures,
-                        videoUrl: lectures.lectureList[].url
-                    })
-
-                });
-        }*/
+            }
         );
 
 
-       // both course id and video id in the request url
-         //http://localhost:3000/courseId/:courseId/videoId/:videoId
-/*
-        let url = "http://localhost:4000/api/v1/"+this.props.params.courseId+"/question_list/"+video_key;
-        console.log(this.props.params.courseId);
-        console.log(video_key);
-
-        let request = new Request(encodeURI(url), {
-            method: "GET",
-            cache: false
-        });
-
-        fetch(request)
-            .then( res => res.json())
-            .then(qList => {
-                // clear the previous question list !!!!!!!!
-                    console.log('....qList', qList);
-                    console.log(this.state.lectures.lectureList[key].url);
-                    this.setState({
-                    questionList: qList,
-                    videoUrl: this.state.lectures.lectureList[key].url
-
-                    })
-            })
-
-*/
 
 
        /* this.setState({
@@ -397,7 +351,7 @@ class LecturePage extends React.Component {
 }
 
 LecturePage.childContextTypes = {
-    //questionList: PropTypes.array,
+    questionList: PropTypes.array,
     videoUrl: PropTypes.string,
     videoKey: PropTypes.number,
     getQuestionListFromChild: PropTypes.func

@@ -9,14 +9,42 @@ import QuestionPageSecondaryReply from './QuestionPageSecondaryReply'
 class QuestionPageFirstLevelReply extends React.Component {
    constructor(props) {
         super(props);
-        this.state={answers: this.props.answer}
-    }
-    /*
-    componentWillMount() {
+        this.state={
+            answers: this.props.answer,
+            condition: false,
+            star: "glyphicon glyphicon-heart-empty",
+            follow: this.props.question.follow
+        }
+
+       this.followQuestion = this.followQuestion.bind(this);
+
+   }
+
+
+
+    followQuestion() {
+        //console.log('~~~',event.target.className);
         this.setState({
-            answers: this.props.answer
-        })
-    }*/
+            condition: !this.state.condition
+        }, function(){
+            if(this.state.condition) {
+                this.setState({
+                    heart: "glyphicon glyphicon-heart",
+                    follow: this.state.follow + 1
+                });
+            } else {
+                this.setState({
+                    heart: "glyphicon glyphicon-heart-empty",
+                    follow: this.state.follow - 1
+                })
+
+            }
+        });
+
+
+
+    }
+
 
     renderSecondaryReply() {
         console.log('-------', this.props.answer.reply);
@@ -41,14 +69,14 @@ class QuestionPageFirstLevelReply extends React.Component {
                 <div>
                     <div className="col-md-1 reply-like">
                         <div className="agree pull-left text-center">
-                            <span className="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+                            <span className={this.state.heart} aria-hidden="true" onClick={() => this.followQuestion()}></span>
                             <p>{this.props.answer.upvote}</p>
                         </div>
                     </div>
                     <div className="col-md-11">
                         <div className="reply-caption">
                             <span className="reply-name">{this.props.answer.username}</span>&nbsp;&nbsp;
-                            <span className="reply-profile">{this.props.answer.mentor === 1? "Mentor":""}</span>&nbsp;&nbsp;
+                            <span className="reply-profile">{this.props.answer.mentor === 1? "Mentor":"Student"}</span>&nbsp;&nbsp;
                             <span className="reply-date">a month ago</span>
                         </div>
                         <p className="reply-content">
@@ -79,78 +107,7 @@ class QuestionPageFirstLevelReply extends React.Component {
                         </div>
                     </div>
                     {this.renderSecondaryReply()}
-                    {/* secondary reply*/}
 
-                    {/*<ul className="panel-body row">
-                     <li>
-                     /!*<div className="col-md-1 reply-like">
-                     <div className="agree pull-left text-center">
-                     <span className="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-                     <p>26</p>
-                     </div>
-                     </div>*!/
-                     <div className="col-md-11 secondary-reply">
-                     <div className="reply-caption">
-                     <span className="reply-name">Christian Cleber</span>&nbsp;&nbsp;
-                     <span className="reply-profile">Mentor</span>&nbsp;&nbsp;
-                     <span className="reply-date">a month ago</span>
-                     </div>
-                     <p className="reply-content">
-                     A minimum viable product has just those core features sufficient to deploy the product,
-                     and no more. Developers typically deploy the product to a subset of possible customersâ€”such
-                     as early adopters thought to be more forgiving, more likely to give feedback, and able to
-                     grasp a product vision from an early prototype or marketing information. This strategy
-                     targets avoiding building products that customers do not want and seeks to maximize
-                     information about the customer per dollar spent. `The minimum viable product is that
-                     version of a new product a team uses to collect the maximum amount of validated learning
-                     about customers with the least effort.
-                     </p>
-                     <div className="action-area">
-                     <div href="#">
-                     <a>
-                     <i className="glyphicon glyphicon-thumbs-up"></i>
-                     &nbsp;&nbsp;1
-                     <span>&nbsp;Upvote &nbsp;&nbsp;</span>
-                     </a>
-                     </div>
-                     </div>
-                     </div>
-                     </li>
-                     <li>
-                     /!*<div className="col-md-1 reply-like">
-                     <div className="agree pull-left text-center">
-                     <span className="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-                     <p>26</p>
-                     </div>
-                     </div>*!/
-                     <div className="col-md-11 secondary-reply">
-                     <div className="reply-caption">
-                     <span className="reply-name">Christian Cleber</span>&nbsp;&nbsp;
-                     <span className="reply-profile">Mentor</span>&nbsp;&nbsp;
-                     <span className="reply-date">a month ago</span>
-                     </div>
-                     <p className="reply-content">
-                     A minimum viable product has just those core features sufficient to deploy the product,
-                     and no more. Developers typically deploy the product to a subset of possible customersâ€”such
-                     as early adopters thought to be more forgiving, more likely to give feedback, and able to
-                     grasp a product vision from an early prototype or marketing information. This strategy
-                     targets avoiding building products that customers do not want and seeks to maximize
-                     information about the customer per dollar spent. `The minimum viable product is that
-                     version of a new product a team uses to collect the maximum amount of validated learning
-                     about customers with the least effort.
-                     </p>
-                     <div className="action-area">
-                     <div href="#">
-                     <a>
-                     <i className="glyphicon glyphicon-thumbs-up"></i>
-                     &nbsp;&nbsp;1
-                     <span>&nbsp;Upvote &nbsp;&nbsp;</span>
-                     </a>
-                     </div>
-                     </div>
-                     </div>
-                     </li>
-                     </ul>*/}
                 </div>
             )
         }

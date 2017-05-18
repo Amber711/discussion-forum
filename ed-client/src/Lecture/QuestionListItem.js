@@ -13,7 +13,9 @@ class QuestionListItem extends React.Component {
     constructor(props) {
         super(props); //当父组建是用 this.props.children来代表所有子组建时，子组建无法用props获得父组建的state/props数据，需要通过context.
         this.state = {
-            condition: false
+            condition: false,
+            star: "iconfont icon-star-hollow",
+            follow: this.props.question.follow
         }
 
         this.followQuestion = this.followQuestion.bind(this);
@@ -21,47 +23,39 @@ class QuestionListItem extends React.Component {
 
 
 
-    followQuestion(event) {
-        console.log(this.state.condition);
-        console.log('---',event.target);
+    followQuestion() {
         //console.log('~~~',event.target.className);
         this.setState({
             condition: !this.state.condition
-        })
-            console.log('after click:', this.state.condition);
-            if(!this.state.condition) {
-                console.log(event.target.className)
-                event.target.className = "iconfont icon-star-hollow"
+        }, function(){
+            if(this.state.condition) {
+                this.setState({
+                    star: "iconfont icon-star-filled",
+                    follow: this.state.follow + 1
+                });
             } else {
-                event.target.className = "iconfont icon-star-filled"
+                this.setState({
+                    star: "iconfont icon-star-hollow",
+                    follow: this.state.follow - 1
+                })
 
             }
+        });
+
 
 
     }
 
-    /*followQuestion() {
-        this.setState({
-            condition: !this.state.condition
-        }, function () {
-            var node = ReactDOM.findDOMNode(this.refs.el);
-            if(!this.state.condition) {
-                node.classList.toggle('iconfont icon-icon-star-hollow');
-            } else {
-                node.classList.toggle('iconfont icon-icon-star-filled');
 
-            }
 
-        })
-    }*/
 
     render() {
         return (
 
                     <div>
                         <div className="q-follow">
-                            <i className="iconfont icon-star-hollow" onClick={() => this.followQuestion(event)}></i>
-                            <p>Follow {this.props.question.follow}</p>
+                            <i className={this.state.star} onClick={() => this.followQuestion()}></i>
+                            <p>Follow {this.state.follow}</p>
                         </div>
                         <Link to={`/${this.props.courseId}/${this.props.videoId}/question/${this.props.question.id}`} className="q-clicked">
                             <div className="q-title">
