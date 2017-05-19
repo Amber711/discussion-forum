@@ -67,7 +67,7 @@ class QuestionList extends React.Component {
 
 
     toQuestionPage(questionId) {
-        var url = '/' + this.props.params.courseId + "/"+"question/"+questionId
+        var url = '/' + this.props.params.courseId +"/"+this.props.params.videoId+ "/"+"question/"+questionId;
         this.context.router.replace(url)
 
     }

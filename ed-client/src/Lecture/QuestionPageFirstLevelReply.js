@@ -12,8 +12,8 @@ class QuestionPageFirstLevelReply extends React.Component {
         this.state={
             answers: this.props.answer,
             condition: false,
-            star: "glyphicon glyphicon-heart-empty",
-            follow: this.props.question.follow
+            heart: "glyphicon glyphicon-heart-empty",
+            //follow: this.props.question.follow
         }
 
        this.followQuestion = this.followQuestion.bind(this);
@@ -30,12 +30,12 @@ class QuestionPageFirstLevelReply extends React.Component {
             if(this.state.condition) {
                 this.setState({
                     heart: "glyphicon glyphicon-heart",
-                    follow: this.state.follow + 1
+                    //follow: this.state.follow + 1
                 });
             } else {
                 this.setState({
                     heart: "glyphicon glyphicon-heart-empty",
-                    follow: this.state.follow - 1
+                    //follow: this.state.follow - 1
                 })
 
             }
@@ -47,20 +47,24 @@ class QuestionPageFirstLevelReply extends React.Component {
 
 
     renderSecondaryReply() {
+        console.log('~~~~~~~~',this.props.answer);
         console.log('-------', this.props.answer.reply);
-        let secondaryReply = this.props.answer.reply.map(answerItem => {
-            return (
-                <li>
-                    <QuestionPageSecondaryReply reply={answerItem} />
-                </li>
-            )
-        });
+        if(this.props.answer.reply) {
+            let secondaryReply = this.props.answer.reply.map(answerItem => {
+                return (
+                    <li>
+                        <QuestionPageSecondaryReply reply={answerItem} />
+                    </li>
+                )
+            });
 
-        return (
-            <ul className="panel-body row">
-                {secondaryReply}
-            </ul>
+            return (
+                <ul className="panel-body row">
+                    {secondaryReply}
+                </ul>
             )
+        }
+
     }
 
     render() {

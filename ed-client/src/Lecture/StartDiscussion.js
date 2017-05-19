@@ -16,11 +16,11 @@ class StartDiscussion extends React.Component {
     }
 
     questionEditted(event) {
-        console.log(event.target.value, event.target.getAttribute('name'))
-        var item = event.target.getAttribute('name')
-        var val = event.target.value
+        console.log(event.target.value, event.target.getAttribute('name'));
+        var item = event.target.getAttribute('name');
+        var val = event.target.value;
         var newDiscussion = this.state.newDiscussion;
-        newDiscussion[item] = val
+        newDiscussion[item] = val;
         /*
         *new Discussion = {'title': '', 'content'}
         * */

@@ -22,7 +22,7 @@ class QuestionPageSecondaryReply extends React.Component {
                 <div className="col-md-11 secondary-reply">
                     <div className="reply-caption">
                         <span className="reply-name">{this.props.reply.username}</span>&nbsp;&nbsp;
-                        <span className="reply-profile">{this.props.reply.mentor === 1? "Mentor":""}</span>&nbsp;&nbsp;
+                        <span className="reply-profile">{this.props.reply.mentor === 1? "Mentor":"Student"}</span>&nbsp;&nbsp;
                         <span className="reply-date">{this.props.reply.date}</span>
                     </div>
                     <p className="reply-content">

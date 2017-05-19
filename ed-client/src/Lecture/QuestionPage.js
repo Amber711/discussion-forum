@@ -3,8 +3,10 @@
  */
 import React from "react";
 import './QuestionPage.css';
-import QuestionFirstLevelReply from './QuestionPageFirstLevelReply'
-import PropTypes from 'prop-types'
+import QuestionFirstLevelReply from './QuestionPageFirstLevelReply';
+import Auth from '../Auth/Auth';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router'
 
 class QuestionPage extends React.Component {
 
@@ -14,10 +16,16 @@ class QuestionPage extends React.Component {
             questionDetail: {},
             questionDesc: {},
             condition: false,
-            star: "iconfont icon-star-hollow",
-            follow: this.props.question.follow
-        }
-        this.followQuestion = this.followQuestion.bind(this)
+            star: "iconfont icon-star-hollow follow-in-desc",
+            // follow: this.props.question.follow
+            answerContent: '',
+            replyContent: ''
+        };
+
+        this.followQuestion = this.followQuestion.bind(this);
+        this.getAnswerText = this.getAnswerText.bind(this);
+        this.addNewAnswer = this.addNewAnswer.bind(this);
+        //this.getReply = this.getReply.bind(this)
     }
 
     getChildContext() {
@@ -63,13 +71,13 @@ class QuestionPage extends React.Component {
         }, function(){
             if(this.state.condition) {
                 this.setState({
-                    star: "iconfont icon-star-filled",
-                    follow: this.state.follow + 1
+                    star: "iconfont icon-star-filled follow-in-desc",
+                    //follow: this.state.follow + 1
                 });
             } else {
                 this.setState({
                     star: "iconfont icon-star-hollow",
-                    follow: this.state.follow - 1
+                    //follow: this.state.follow - 1
                 })
 
             }
@@ -79,11 +87,116 @@ class QuestionPage extends React.Component {
 
     }
 
+    getAnswerText(event) {
+        var val = event.target.value;
+        this.setState({
+            answerContent:val
+        }, function() {
+            console.log(this.state.answerContent)
+        })
+
+    }
+
+    /*getReply(event) {
+        var val = event.target.value;
+        this.setState({
+            replyContent: val
+        })
+    }*/
+
+    addNewAnswer() {
+        console.log('**** adding new answer');
+        var courseId = this.props.params.courseId;
+        var videoId = this.props.params.videoId;
+        var questionId = this.props.params.questionId;
+        var email =Auth.getEmail();
+        var url = "http://localhost:4000/api/v1/"+courseId+"/"+videoId+"/question/"+questionId+"/new_answer";
+        if(this.state.answerContent !== '') {
+            var qD = this.state.questionDetail;
+            fetch(url,{
+                method: 'POST',
+                cache: false,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: this.state.answerContent,
+                    email: email,
+                    answerId: qD.answers.length + 1
+                })
+            }).then(response => {
+                if(response.status === 200) {
+
+                    qD.answers.push({
+                        username: email,
+                        email: email,
+                        date: '0 day ago',
+                        mentor: 0,
+                        upvote : 0,
+                        content: this.state.answerContent,
+                        //answerId: qD.answers.length + 1
+                    });
+
+                    this.setState({
+                        questionDetail: qD
+                    })
+                }
+            })
+
+        }
+
+
+    };
+
+    /*addNewReply() {
+        var courseId = this.props.params.courseId;
+        var videoId = this.props.params.videoId;
+        var questionId = this.props.params.questionId;
+        var email =Auth.getEmail();
+        var url = "http://localhost:4000/api/v1/"+courseId+"/"+videoId+"/"+questionId+"/new_reply";
+        if(this.state.replyContent !== '') {
+            fetch(url,{
+                method: 'POST',
+                cache: false,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: this.state.replyContent,
+                    email: email
+                })
+            }).then(response => {
+                if(response.status === 200) {
+                    var qD = this.state.questionDetail;
+                    qD.answers.push({
+                        username: email,
+                        email: email,
+                        date: '0 day ago',
+                        mentor: 0,
+                        upvote : 0,
+                        content: this.state.replyContent
+                    });
+
+                    this.setState({
+                        questionDetail: qD
+                    });
+                   // var url = '/' + this.props.params.courseId +"/"+this.props.params.videoId+ "/"+"question/"+questionId;
+                    //this.context.router.replace(url)
+                }
+            })
+
+        }
+    }*/
+
     renderReply() {
         if(this.state.questionDetail.answers){
+            console.log('!!!!!!!!!!!',this.state.questionDetail);
+            console.log('!!!!!!!!!!!!!',this.state.questionDetail.answers);
             let firstLevelReplies = this.state.questionDetail.answers.map(answer => {
                 return (
-                    <li className="panel-body row">
+                    <li className="panel-body row" key={answer.answerId}>
                         <QuestionFirstLevelReply answer={answer} />
                     </li>
                 )
@@ -121,7 +234,7 @@ class QuestionPage extends React.Component {
                                     <span className={this.state.star} onClick={() => this.followQuestion()}></span>
 
                                 </a>
-                                <a href="#" className="click-to-follow">
+                                <a href="#answer" className="click-to-follow">
                                     Answer
                                     <span className="glyphicon glyphicon-edit pull-right answer-icon" aria-hidden="true"></span>
 
@@ -146,12 +259,10 @@ class QuestionPage extends React.Component {
                     <div className="comment-input panel-body row">
                         <span className="profile-area">FM</span>
                         <div className="reply-box">
-                                <textarea className="edit-container">
+                                <textarea className="edit-container"  id="answer" onChange={(event) => this.getAnswerText(event)}>
                                 </textarea>
-                            <div id="summernote"></div>
                             <div className="reply-button-container">
-                                <div className="flex-1-reply-button"></div>
-                                <button className="reply-button">Reply</button>
+                                <Link className="reply-button" onClick={() => this.addNewAnswer()}>Reply</Link>
                             </div>
                         </div>
                     </div>
@@ -165,6 +276,7 @@ class QuestionPage extends React.Component {
 
 QuestionPage.childContextTypes = {
     //questionList: PropTypes.array,
+    //router: PropTypes.object.isRequired,
     answers: PropTypes.array
 };
 
