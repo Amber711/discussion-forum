@@ -37,7 +37,7 @@ router.post('/build_and_run', jsonParser, function(req,res){
     rest_client.methods.build_and_run({
         data: {code: userCode, lang: lang},
         headers: {'Content-Type': "application/json"}
-    },(data, response) => {
+    },(data, res) => {
         // Generate a human readable response displayed in output textarea.
         //executor server will put build/execute results in the data.
         const text = `Build output: ${data['build']}

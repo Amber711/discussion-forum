@@ -9,7 +9,7 @@ module.exports = function(io) {
     io.on('connection', socket => {
         let sessionId = socket.handshake.query['sessionId'];
 
-        //why do we need this map?
+        //sessionId for a same editor, socketId for users.
         socketIdToSessionId[socket.id] = sessionId;
 
         if(!(sessionId in collaborations)) {

@@ -17,6 +17,8 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+//app.use(cors()); for cross origin access
+
 app.use('/static' ,express.static(path.join(__dirname, '../client/build/static/')));
 
 

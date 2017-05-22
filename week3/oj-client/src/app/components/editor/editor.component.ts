@@ -70,6 +70,11 @@ export class EditorComponent implements OnInit {
       if(this.editor.lastAppliedChange != e) { //防止因为网络等其他原因，造成两次发送相同的一次修改
         this.collaboration.change(JSON.stringify(e))
       }
+    });
+
+    this.editor.getSession().getSelection().on('changeCursor', () => {
+      let cursor = this.editor.getSession().getSelection().getCursor();
+      this.collaboration.cursorMove(JSON.stringify(cursor));
     })
 
   }

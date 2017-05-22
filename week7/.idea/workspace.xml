@@ -36,8 +36,8 @@
       <file leaf-file-name="news_monitor.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/news_pipeline/news_monitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="966">
-              <caret line="50" column="49" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
+            <state relative-caret-position="357">
+              <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -184,8 +184,8 @@
     <handled-path value="$PROJECT_DIR$/web_server/server/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="499" />
-    <option name="y" value="231" />
+    <option name="x" value="637" />
+    <option name="y" value="23" />
     <option name="width" value="1661" />
     <option name="height" value="1233" />
   </component>
@@ -273,7 +273,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="7.2.1" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../week4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../week8" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
@@ -958,15 +958,15 @@
       <workItem from="1491950644707" duration="39067000" />
       <workItem from="1492666597389" duration="10000" />
       <workItem from="1492822993609" duration="1173000" />
-      <workItem from="1492973853938" duration="25207000" />
+      <workItem from="1492973853938" duration="25910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110031000" />
+    <option name="totallyTimeSpent" value="110734000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="499" y="231" width="1661" height="1233" extended-state="0" />
+    <frame x="637" y="23" width="1661" height="1233" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1413,8 +1413,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/news_pipeline/news_monitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="50" column="49" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
+        <state relative-caret-position="357">
+          <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
           <folding />
         </state>
       </provider>
