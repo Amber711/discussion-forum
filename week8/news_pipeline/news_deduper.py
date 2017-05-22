@@ -14,10 +14,11 @@ import mongodb_client
 from cloudAMQP_client import CloudAMQPClient
 
 # Use your own Cloud AMQP queue
+
 DEDUPER_NEWS_TASK_QUEUE_URL = "amqp://uvrbifmd:IhbtFUAbbl_F1yBQr32gohuTMU2n6JsW@donkey.rmq.cloudamqp.com/uvrbifmd"
 DEDUPER_NEWS_TASK_QUEUE_NAME = "news_for_deduper"
 
-SLEEP_TIME_IN_SECONDS = 1
+SLEEP_TIME_IN_SECONDS = 3
 
 NEWS_TABLE_NAME = "news"
 
@@ -39,10 +40,16 @@ def handle_message(msg):
     published_at_day_end = published_at_day_begin + datetime.timedelta(days=1)
 
     db = mongodb_client.get_db()
+
+    # Get news in the recent time frame: within 1 day from mongodb
     same_day_news_list = list(db[NEWS_TABLE_NAME].find({'publishedAt': {'$gte': published_at_day_begin, '$lt': published_at_day_end}}))
 
+    # Filter every single news for the similar one.
     if same_day_news_list is not None and len(same_day_news_list) > 0:
+        # collect the text of news grabbed from mongodb to documents : [str] //str: news['text']
         documents = [str(news['text']) for news in same_day_news_list]
+
+        # Insert the news we just grab from AMQP(deduper_news_queue) to documents : at the front of the list
         documents.insert(0, text)
 
         # Calculate similarity matrix

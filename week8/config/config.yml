@@ -1,0 +1,32 @@
+mongodb:
+  host: localhost
+  port: 27017
+  db:
+    - tap-news
+    - tap-news-users
+  collections:
+    - news
+    - user_preference_model
+    - click_logs
+  mongoDbUri: mongodb://localhost/tap-news-users
+redis:
+  host: localhost
+  port: 6379
+  news_monitor_expire_secs: 3600
+
+cloudAMQP:
+  scrapper_queue: {url: amqp://plxgbrdw:vHoQBz-9tL_jRPkx--lcGhp1FCV6yZbk@clam.rmq.cloudamqp.com/plxgbrdw, name: cs503_tap_news}
+  deduper_queue: {url: amqp://uvrbifmd:IhbtFUAbbl_F1yBQr32gohuTMU2n6JsW@donkey.rmq.cloudamqp.com/uvrbifmd, name: news_for_deduper}
+  logger_queue: {url: amqp://seoegmme:YwxZYMkMT3UTObj-Hw7CXSPLx2EIXhzh@donkey.rmq.cloudamqp.com/seoegmme, name: click_logger_queue}
+  news_fetcher_sleep_time: 5
+  news_monitor_sleep_time: 10
+  click_logger_sleep_time: 5
+  news_deduper_sleep_time: 3
+
+web_server:
+  url: http://localhost
+  port: 3000
+  rpc_server:
+   port: 4040
+   hostname: localhost
+  jwtSecret: a secret phrase!!!

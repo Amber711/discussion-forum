@@ -4,6 +4,7 @@
 import './NewsPanel.css'
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
+
 import _ from 'lodash';
 import Auth from '../Auth/Auth';
 
@@ -38,7 +39,7 @@ class NewsPanel extends React.Component {
         let request = new Request(encodeURI(url), {
             method: 'GET',
             headers: {
-                'Authorization': 'bearer' + Auth.getToken(),
+                'Authorization': 'bearer ' + Auth.getToken(),
             },
             cache: false
         });

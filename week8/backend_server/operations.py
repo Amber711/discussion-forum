@@ -9,22 +9,26 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 from bson.json_util import dumps
 import mongodb_client
-
+from datetime import datetime
 
 REDIS_HOST = "localhost"
 REDIS_PORT = "6379"
 
 NEWS_TABLE_NAME = "news"
-#CLICK_LOGS_TABLE_NAME = 'click_logs'
+CLICK_LOGS_TABLE_NAME = 'click_logs'
 
 NEWS_LIMIT = 100
 NEWS_LIST_BATCH_SIZE = 10
 USER_NEWS_TIME_OUT_IN_SECONDS = 60
 
-
+LOG_CLICKS_TASK_QUEUE_URL ='amqp://seoegmme:YwxZYMkMT3UTObj-Hw7CXSPLx2EIXhzh@donkey.rmq.cloudamqp.com/seoegmme'
+LOG_CLICKS_TASK_QUEUE_NAME ='click_logger_queue'
 
 redis_client = redis.StrictRedis(REDIS_HOST, REDIS_PORT, db=0)
-#cloudAMQP_client = CloudAMQPClient
+
+from cloudAMQP_client import CloudAMQPClient
+
+cloudAMQP_client = CloudAMQPClient(LOG_CLICKS_TASK_QUEUE_URL, LOG_CLICKS_TASK_QUEUE_NAME)
 
 def getNewsSummariesForUser(user_id, page_num):
     page_num = int(page_num)
@@ -66,3 +70,24 @@ def getNewsSummariesForUser(user_id, page_num):
         sliced_news = total_news[begin_index:end_index]
 
     return json.loads(dumps(sliced_news))
+
+'''def logNewsClickForUser(user_id, news_id):
+    message = {'userId': user_id, 'newsId': news_id, 'timestamp': timestamp.utcnow()}
+
+    #why do we need to store log in db?
+    db = mongodb_client.get_db()
+    db[CLICK_LOGS_TABLE_NAME].insert(message)
+
+    # Send log task to machine learning service for prediction
+    message = {'userId': user_id, 'newsId': news_id, 'newsstamp': str(timestamp.utcnow())}
+    cloudAMQP_client.sendMessage(message)'''
+
+def logNewsClickForUser(user_id, news_id):
+    message = {'userId': user_id, 'newsId': news_id, 'timestamp': datetime.utcnow()}
+
+    db = mongodb_client.get_db()
+    db[CLICK_LOGS_TABLE_NAME].insert(message)
+
+    # Send log task to machine learning service for prediction
+    message = {'userId': user_id, 'newsId': news_id, 'timestamp': str(datetime.utcnow())}
+    cloudAMQP_client.sendMessage(message);

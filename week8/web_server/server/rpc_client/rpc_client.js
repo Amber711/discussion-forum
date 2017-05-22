@@ -1,4 +1,7 @@
 jayson = require('jayson');
+//var yamlConfig = require('node-yaml-config');
+//var config = yamlConfig.load('../../../config/config.yml');
+//var rpcConfig = jayson.client.http(rpcConfig);
 
 var client = jayson.client.http({
    port: 4040,
@@ -23,8 +26,15 @@ function getNewsSummariesForUser(user_id, page_num, callback) {
     });
 }
 
+function logNewsClickForUser(user_id, news_id) {
+    click.request('logNewsClickForUser', [user_id,news_id], function (err, error, response) {
+        if(err) throw err;
+        console.log(response);
+    })
+}
 
  module.exports = {
      add : add,
-     getNewsSummariesForUser : getNewsSummariesForUser
+     getNewsSummariesForUser : getNewsSummariesForUser,
+     logNewsClickForUser : logNewsClickForUser
  }

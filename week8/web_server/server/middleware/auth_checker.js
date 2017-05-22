@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
     }
 
     // get the last part from a authorization header string like "bearer token-value"
-    const token = req.headers.authorization.slice(6);
+    const token = req.headers.authorization.slice(7);
     console.log('-------------------');
     console.log('auth_checker: token: ' + token);
 
