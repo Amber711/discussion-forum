@@ -15,7 +15,7 @@ class QuestionList extends React.Component {
         this.state = {
             videoKey: this.context.videoKey,
             questionList: []
-        }
+        };
 
         this.getQuestionList = this.getQuestionList.bind(this);
         /*this.toQuestionPage = this.toQuestionPage.bind(this)*/
@@ -47,7 +47,7 @@ class QuestionList extends React.Component {
                 this.setState({
                     questionList: []
                 }, function(){
-                    console.log('------------------', this.state.questionList.length == 0)
+                    console.log('------------------', this.state.questionList.length == 0);
                     this.setState({
                         questionList: qList,
                         //videoUrl: this.state.lectures.lectureList[this.context.videoKey].url
