@@ -11,8 +11,7 @@ var jsonParser = bodyParser.json();
 
 // var lectureService = require("../services/lectureService");
 
-var bodyParser = require("body-parser");
-var jsonParser = bodyParser.json();
+
 
 
 router.get("/profile/:userId", function (req, res) {
@@ -43,13 +42,11 @@ router.get("/:courseId/:videoId/question/:questionId", function (req, res) {
     var videoId = req.params.videoId;
     var questionId = req.params.questionId;
     answerService.getAnswerListForQuestion(courseId, videoId, questionId)
-        .then(answer => res.json(answer.answers));
+        .then(answer => res.json(answer));
 })
 
 router.post("/:courseId/:videoId/new_discussion",jsonParser,function(req, res) {
-    /*var courseId = req.params.courseId;
-    var videoId = req.params.videoId;*/
-    console.log('reqest body---------',req.body);
+
     discussionService.addDiscussion(req.body)
         .then(function(str){
             res.status(200).send("successfully added a new discussion!")
@@ -58,7 +55,17 @@ router.post("/:courseId/:videoId/new_discussion",jsonParser,function(req, res) {
 
         })
 
-})
+});
+
+router.post("/:courseId/:videoId/question/:questionId/new_answer", jsonParser, function (req, res) {
+    answerService.addAnswer(req.body, req.params.courseId, req.params.videoId, req.params.questionId)
+        .then(function (answer) {
+            res.json(answer);
+        }, function (error) {
+            res.status(400).send("answer already exists!");
+        });
+});
+
 
 /*
 router.post("/lecture", jsonParser, function (req, res) {

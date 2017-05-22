@@ -2,6 +2,8 @@
  * Created by Amber on 5/18/17.
  */
 var DiscussionModel = require("../models/discussionModel");
+var AnswerModel = require("../models/answerModel");
+
 
 var getQuestionListForLecture = function (courseId, videoId) {
     return new Promise((resolve,reject) => {
@@ -26,29 +28,36 @@ var addDiscussion = function (newDiscussion) {
             "replies": 0,
             "id": newDiscussion.id
 
-        }
+        };
+
         //DiscussionModel.findOne({ courseId: newDiscussion.courseId, videoId: newDiscussion.videoId},
         console.log('adding new question///////////////////////')
         DiscussionModel.update({courseId: newDiscussion.courseId, videoId: newDiscussion.videoId},{$push: {questionList: questionListItem}}, {upsert:true}, function(err){
             if(err) {
+
+
                 reject(err)
             }else {
-                resolve('Successfully added')
+
+                let answerItem = {
+                    "courseId": newDiscussion.courseId,
+                    "videoId": newDiscussion.videoId,
+                    "questionId": newDiscussion.id,
+                    "title": newDiscussion.title,
+                    "date" : " 0 day ago",
+                    "author": newDiscussion.author,
+                    "content": newDiscussion.content,
+                    "answers": []
+
+                };
+                var newAnswer = new AnswerModel(answerItem);
+                newAnswer.save();
+                resolve('Successfully added');
+
+
             }
         });
 
-        /*
-        let questionDetailItem = {
-
-        }*/
-           /* function (err, discussion) {
-                if (discussion) {
-                    reject("discussion already exists");
-                } else {
-                    var mongoDiscussion = new DiscussionModel(newDiscussion);
-                    mongoDiscussion.save();
-                    resolve(newDiscussion);
-                }*/
             });
     }
 

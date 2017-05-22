@@ -1,11 +1,11 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'build' ]
 2 info using npm@3.10.10
 3 info using node@v7.2.1
 4 verbose stack Error: ENOENT: no such file or directory, open '/Users/apple/projects/class503/bittigercs503/ebooks-discussion/package.json'
 5 verbose cwd /Users/apple/projects/class503/bittigercs503/ebooks-discussion
 6 error Darwin 16.5.0
-7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build"
 8 error node v7.2.1
 9 error npm  v3.10.10
 10 error path /Users/apple/projects/class503/bittigercs503/ebooks-discussion/package.json

@@ -219,7 +219,7 @@ class QuestionPage extends React.Component {
                 /*question from author*/
 
                 <div className="container q-detail-wrapper">
-                    <div className="panel panel-default q-desc">
+                    <div className="panel panel-default q-desc b-grey">
                         <ul className="panel-body row author-q-desc">
 
                             <li className="col-md-9 text-left">
@@ -251,7 +251,7 @@ class QuestionPage extends React.Component {
 
 
                     {/*reply detail*/}
-                    <ul className="panel panel-default reply-list">
+                    <ul className="panel panel-default reply-list b-grey">
 
                         {this.renderReply()}
 

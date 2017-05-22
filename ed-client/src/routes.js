@@ -73,7 +73,5 @@ export default (
                 <Route path="/:courseId/:videoId/start_discussion" component={StartDiscussion}/>
             </Route>
         <Route path="/logout" component={LoginPage} />
-
-
     </Route>
 )

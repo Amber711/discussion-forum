@@ -14,7 +14,7 @@ var getAnswerListForQuestion = function (courseId, videoId, questionId) {
             }
         });
     });
-}
+};
 
 var addQuestionDetail = function (newQuestionDetail) {
     return new Promise((resolve,reject) => {
@@ -30,9 +30,36 @@ var addQuestionDetail = function (newQuestionDetail) {
                 }
             });
     })
-}
+};
+
+
+var addAnswer = function (newAnswer, courseId, videoId, questionId) {
+    return new Promise((resolve, reject) => {
+            let answerItem = {
+                "username": newAnswer.email,
+                "email": newAnswer.email,
+                "date": 0,
+                "mentor": 0,
+                "upvote": 0,
+                "content": newAnswer.content,
+                "answerId" : newAnswer.answerId,
+                "reply":[]
+            };
+            AnswerModel.update({courseId: courseId, videoId: videoId,
+                questionId: questionId}, {$push: {
+                answers: answerItem}}, {upsert: true}, function(err){
+                if(err) {
+                    reject(err)
+                } else {
+                    resolve(answerItem);
+                }
+            })
+        }
+    )};
+
 
 module.exports = {
     getAnswerListForQuestion: getAnswerListForQuestion,
-    addQuestionDetail: addQuestionDetail
+    addQuestionDetail: addQuestionDetail,
+    addAnswer: addAnswer
 }

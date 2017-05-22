@@ -2,6 +2,8 @@ li {
     list-style: none
 }
 
+
+
 .q-detail-wrapper {
     position: relative;
     padding-top: 2%;
@@ -133,8 +135,8 @@ li {
 
 .reply-button {
     background-color: #e5e5e5;
-    border: 1px solid #e5e5e5;
-    color: rgba(0,0,0,0.26);
+    border: 1px solid #504141;
+    color: #333;
     cursor: pointer
 }
 .reply-button:hover {
@@ -162,5 +164,9 @@ li {
     padding-top: 22px;
     width: 100%;
     padding-left: 16%;
+}
+
+.b-grey {
+    background-color: #e6e6e6;
 }
 

@@ -19,6 +19,7 @@ var AnswerSchema = mongoose.Schema({
             mentor: Number,
             upvote: Number,
             content: String,
+            answerId:Number,
             reply:[{
                 username: String,
                 date: String,
