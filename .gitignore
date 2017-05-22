@@ -2,4 +2,5 @@
 .idea/
 ed-client/node_modules
 ed-client/build
+../.idea
 npm-debug.log
